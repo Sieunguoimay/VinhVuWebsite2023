@@ -12,7 +12,7 @@ export default {
                 },
                 {
                     id: 1,
-                    display_name: "More",
+                    display_name: "Service",
                     has_sub_nav_items: true,
                     target_page_indices: [1, 2, 3],
                 },
