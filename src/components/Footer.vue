@@ -7,15 +7,24 @@
                 <p>{{ info.texts.find(t => t.key == "phone").value }}</p>
                 <p>{{ info.texts.find(t => t.key == "email").value }}</p>
             </div>
-            <div class="middle">
+            <div class="middle footer-content navigation">
+                <div class="nav-items-group" v-for="group in navigation.nav_items.filter(i => i.has_sub_nav_items)">
+                    <div class="group-name">
+                        <p>{{ group.display_name.toUpperCase() }}</p>
+                    </div>
+                    <div class="sub-nav-item" v-for="item in this.$dataProvider.getSubNavItems(group)">
+                        <router-link :to="this.$dataProvider.getPage(item.target_page_index).path">{{ item.display_name
+                        }}</router-link>
+                    </div>
+                </div>
             </div>
-            <div class="right footer-content">
-                <a v-for="social in info.socials" :href="social.url" :key="social.name" class="social" target="_blank">
+            <div class="right footer-content social">
+                <a v-for="social in info.socials" :href="social.url" :key="social.name" target="_blank">
                     <img :src="social.img" :alt="social.name">
                 </a>
             </div>
         </div>
-        <div class="lower">
+        <div class="footer-lower">
         </div>
     </div>
 </template>
@@ -32,10 +41,9 @@ img {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    min-height: 200px;
+    /* min-height: 200px; */
 
-    background-color: rgb(68, 80, 90);
-    padding-top: 20px;
+    background-color: rgb(152, 161, 168);
 }
 
 .upper {
@@ -45,24 +53,60 @@ img {
     flex-wrap: wrap;
     justify-content: space-evenly;
     height: 80%;
+    margin-top: 20px;
 }
 
-.upper div {
-    /* flex: 1; */
-    min-width: 300px;
-}
-
-.social img {
-    width: 50px;
-    height: auto;
+.footer-lower {
+    /* border-top: 1px solid rgb(56, 65, 80); */
+    min-height: 50px;
+    background-color: rgb(46, 79, 128);
 }
 
 .footer-content {
-    color:aliceblue;
+    color: aliceblue;
+    max-width: 100%;
+    min-width: 350px;
+    margin-bottom: 20px;
 }
-.info{
 
+.navigation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
+
+.nav-items-group {
+    flex: 1;
+}
+
+.sub-nav-item {
+    /* font-size: small; */
+}
+
+.sub-nav-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.social {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.social a {
+    display: inline-block;
+}
+
+.social img {
+    width: 40px;
+    height: auto;
+    display: block;
+}
+
+.info {}
 </style>
 <script>
 export default {

@@ -50,7 +50,7 @@ img {
     align-self: flex-end;
 }
 
-@media (min-width: 768px)  {
+@media (min-width: 768px) {
 
     .logo {
         width: 20%;
@@ -200,16 +200,16 @@ export default {
 
                 return [];
             }
-
-            var subNavItems = [];
-            for (var i = 0; i < selectedNavItem.target_page_indices.length; i++) {
-                subNavItems.push({
-                    id: i,
-                    has_sub_nav_items: false,
-                    target_page_index: selectedNavItem.target_page_indices[i],
-                });
-            }
-            return subNavItems;
+            return this.$dataProvider.getSubNavItems(selectedNavItem);
+            // var subNavItems = [];
+            // for (var i = 0; i < selectedNavItem.target_page_indices.length; i++) {
+            //     subNavItems.push({
+            //         id: i,
+            //         has_sub_nav_items: false,
+            //         target_page_index: selectedNavItem.target_page_indices[i],
+            //     });
+            // }
+            // return subNavItems;
         },
         getPageName(nav_item) {
             if (nav_item.hasOwnProperty('has_sub_nav_items') && nav_item.has_sub_nav_items) {
