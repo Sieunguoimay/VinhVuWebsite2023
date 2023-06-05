@@ -41,19 +41,19 @@ img {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: stretch;
-    box-shadow: 0 0 0 2px #f0f0f0;
+    /* box-shadow: 0 0 0 2px #f0f0f0; */
     gap: 5%;
+    background-color: rgb(236, 236, 236);
 }
 
 .header-item {
     align-self: flex-end;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px)  {
 
-    /* Styles for screens wider than 768px */
     .logo {
-        width: 30vw;
+        width: 20%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -63,7 +63,6 @@ img {
 
 @media (max-width: 768px) {
 
-    /* Styles for screens wider than 768px */
     .logo {
         width: 100%;
         display: flex;
@@ -75,16 +74,22 @@ img {
 
 .logo img {
     height: 100px;
+    display: block;
+}
+
+.logo a {
+    display: inline-block;
 }
 
 .navigation {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* justify-content: space-evenly; */
-    gap: 30px;
-    /* width: 70vw; */
-    height: fit-content;
+    justify-content: space-evenly;
+    /* gap: 30px; */
+    /* width: 100%; */
+    /* height: fit-content; */
+    flex: 1;
 }
 
 .navigation-panel {
@@ -96,7 +101,7 @@ img {
     max-width: 100%;
 
     z-index: 2;
-    position: absolute;
+    position: fixed;
 
     background-color: rgb(255, 230, 230);
 }
@@ -125,7 +130,8 @@ img {
 }
 
 .nav-item:hover {
-    color: rgb(129, 129, 129)
+    color: rgb(255, 225, 183);
+    transition: color 0.2s;
 }
 
 .nav-panel-item:hover {
