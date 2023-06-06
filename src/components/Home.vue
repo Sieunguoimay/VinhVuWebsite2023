@@ -1,6 +1,5 @@
 <template>
     <div class="main-body">
-
         <div class="slider">
             <transition name="slide" mode="out-in">
                 <img :key="currentSlide" class="slide" :src="slides[currentSlide]" alt="Slide">
@@ -17,6 +16,7 @@
 
 .slider {
     max-height: 50vh;
+    min-height: 100px;
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -77,8 +77,8 @@ export default {
     data() {
         return {
             slides: [
-                '../src/assets/cover/cover_image_1.jpg',
-                '../src/assets/cover/cover_image_2.jpg',
+                '/src/assets/cover/cover_image_1.jpg',
+                '/src/assets/cover/cover_image_2.jpg',
             ],
             currentSlide: 0,
         };

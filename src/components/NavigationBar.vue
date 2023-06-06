@@ -7,7 +7,7 @@
                 getPageName(nav_item) }}</router-link>
             <a v-if="nav_item.has_sub_nav_items">{{ getPageName(nav_item) }}</a>
 
-            <img src="../assets/down-arrow.png" alt="Down Arrow" v-if="nav_item.has_sub_nav_items">
+            <img src="/src/assets/down-arrow.png" alt="Down Arrow" v-if="nav_item.has_sub_nav_items">
         </div>
     </div>
 </template>

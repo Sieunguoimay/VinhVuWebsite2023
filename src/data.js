@@ -25,18 +25,18 @@ export default {
             socials: [{
                 name: "Facebook",
                 url: "https://facebook.com",
-                img: "../src/assets/socials/icon_facebook.png"
+                img: "/socials/icon_facebook.png"
             }, {
                 name: "Zalo",
                 url: "https://web.zalo.com",
-                img: "../src/assets/socials/icon_zalo.png"
+                img: "/socials/icon_zalo.png"
             }, {
                 name: "This Page",
                 url: "/",
-                img: "../src/assets/logo.png"
+                img: "/logo.png"
             }],
             logo: {
-                img: "../src/assets/logo.png",
+                img: "/logo.png",
             },
         },
         navigation: {

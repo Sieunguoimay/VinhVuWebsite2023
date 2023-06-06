@@ -13,14 +13,15 @@
                         <p>{{ group.display_name.toUpperCase() }}</p>
                     </div>
                     <div class="sub-nav-item" v-for="item in this.$dataProvider.getSubNavItems(group)">
-                        <router-link :to="this.$dataProvider.getPage(item.target_page_index).path">{{ item.display_name
+                        <router-link :to="this.$dataProvider.getPage(item.target_page_index).path">{{
+                            item.display_name
                         }}</router-link>
                     </div>
                 </div>
             </div>
             <div class="right footer-content social">
                 <a v-for="social in info.socials" :href="social.url" :key="social.name" target="_blank">
-                    <img :src="social.img" :alt="social.name">
+                    <img :src="'/src/assets' + social.img" :alt="social.name">
                 </a>
             </div>
         </div>
@@ -66,7 +67,8 @@ img {
     justify-content: center;
     align-items: center;
 }
-.footer-lower a{
+
+.footer-lower a {
     color: inherit;
 }
 
@@ -88,7 +90,7 @@ img {
 }
 
 /* .sub-nav-item { */
-    /* font-size: small; */
+/* font-size: small; */
 /* } */
 
 .sub-nav-item a {

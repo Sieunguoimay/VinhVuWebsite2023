@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && copyfiles \"src/assets/**/*\" dist",
+    "copy-assets": "copyfiles -u 2 \"src/assets/**/*\" dist/assets",
     "preview": "vite preview"
   },
   "dependencies": {
