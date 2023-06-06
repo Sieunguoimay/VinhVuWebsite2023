@@ -25,6 +25,8 @@
             </div>
         </div>
         <div class="footer-lower">
+            <a :href="info.texts.find(t => t.key == 'website_url').value">{{ info.texts.find(t => t.key ==
+                "website_url").label }}</a>
         </div>
     </div>
 </template>
@@ -60,6 +62,12 @@ img {
     /* border-top: 1px solid rgb(56, 65, 80); */
     min-height: 50px;
     background-color: rgb(46, 79, 128);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer-lower a{
+    color: inherit;
 }
 
 .footer-content {
@@ -79,9 +87,9 @@ img {
     flex: 1;
 }
 
-.sub-nav-item {
+/* .sub-nav-item { */
     /* font-size: small; */
-}
+/* } */
 
 .sub-nav-item a {
     text-decoration: none;
@@ -101,8 +109,8 @@ img {
 }
 
 .social img {
-    width: 40px;
-    height: auto;
+    height: 40px;
+    width: auto;
     display: block;
 }
 

@@ -2,6 +2,10 @@ export default {
     data: {
         info: {
             texts: [{
+                key: "website_url",
+                label: "www.abc.com",
+                value: "https://abc.com"
+            }, {
                 key: "website_full_name",
                 label: "",
                 value: "Full website name"
@@ -17,7 +21,7 @@ export default {
                 key: "email",
                 label: "Email",
                 value: "Email@email.com"
-            },],
+            }, ],
             socials: [{
                 name: "Facebook",
                 url: "https://facebook.com",
@@ -29,39 +33,39 @@ export default {
             }, {
                 name: "This Page",
                 url: "/",
-                img: "../src/assets/logo.svg"
+                img: "../src/assets/logo.png"
             }],
+            logo: {
+                img: "../src/assets/logo.png",
+            },
         },
         navigation: {
-            logo: {
-                img: "https://cdn.logo.com/hotlink-ok/logo-social.png",
-            },
             nav_items: [{
-                id: 0,
-                target_page_index: 0,
-                has_sub_nav_items: false,
-            },
-            {
-                id: 1,
-                display_name: "Service",
-                has_sub_nav_items: true,
-                target_page_indices: [1, 2, 3],
-            },
-            {
-                id: 3,
-                display_name: "Solution",
-                has_sub_nav_items: true,
-                target_page_indices: [4, 5],
-            }, {
-                id: 4,
-                display_name: "News",
-                has_sub_nav_items: true,
-                target_page_indices: [6, 7],
-            }, {
-                id: 5,
-                target_page_index: 8,
-                has_sub_nav_items: false,
-            },
+                    id: 0,
+                    target_page_index: 0,
+                    has_sub_nav_items: false,
+                },
+                {
+                    id: 1,
+                    display_name: "Services",
+                    has_sub_nav_items: true,
+                    target_page_indices: [1, 2, 3],
+                },
+                {
+                    id: 3,
+                    display_name: "Solutions",
+                    has_sub_nav_items: true,
+                    target_page_indices: [4, 5],
+                }, {
+                    id: 4,
+                    display_name: "News",
+                    has_sub_nav_items: true,
+                    target_page_indices: [6, 7],
+                }, {
+                    id: 5,
+                    target_page_index: 8,
+                    has_sub_nav_items: false,
+                },
             ],
         },
         pages: [{
@@ -109,10 +113,10 @@ export default {
             path: "/contact",
             name: "Contact",
             content: "Contact",
-        },]
+        }, ]
     },
     getData() {
-        this.data.navigation.logo.alt_string = "Website Name";
+        this.data.info.logo.alt_string = "Website Name";
         return this.data;
     },
     getPage(pageId) {
