@@ -11,7 +11,7 @@
 <style scoped>
 .main-body {
     /* height: 1000px; */
-    padding-top: 2px;
+    /* padding-top: 2px; */
 }
 
 .slider {

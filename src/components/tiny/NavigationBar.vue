@@ -3,9 +3,9 @@
         <div class="nav-item" v-for="nav_item in navigation.nav_items" :key="nav_item.id"
             @mouseover="onNavItemHovered($event, nav_item)"
             @mouseleave="{ if(nav_item.has_sub_nav_items) onNavItemUnhovered($event); }">
-            <router-link :to="$dataProvider.getPage(nav_item.target_page_index).path" v-if="!nav_item.has_sub_nav_items">{{
-                getPageName(nav_item) }}</router-link>
-            <a v-if="nav_item.has_sub_nav_items">{{ getPageName(nav_item) }}</a>
+            <router-link :to="nav_item.path" v-if="!nav_item.has_sub_nav_items">{{
+                nav_item.display_name }}</router-link>
+            <a v-if="nav_item.has_sub_nav_items">{{ nav_item.display_name }}</a>
 
             <img src="/src/assets/down-arrow.png" alt="Down Arrow" v-if="nav_item.has_sub_nav_items">
         </div>
@@ -71,24 +71,10 @@ export default {
     },
     methods: {
         onNavItemHovered(event, nav_item) {
-            this.$eventBus.$emit("navigation_bar_nav_item_hovered", { event: event, nav_item: nav_item });
+            this.$eventBus.$emit("navigation_bar_nav_item_hovered", { event: event, nav_item_index: this.navigation.nav_items.indexOf(nav_item), nav_item: nav_item });
         },
         onNavItemUnhovered(event) {
             this.$eventBus.$emit("navigation_bar_nav_item_unhovered", { event: event })
-        }
-        , getPageName(nav_item) {
-            if (nav_item.hasOwnProperty('has_sub_nav_items') && nav_item.has_sub_nav_items) {
-                return nav_item.display_name;
-            }
-            var page = this.$dataProvider.getPage(nav_item.target_page_index);
-            return page.name;
-        },
-        getPagePath(nav_item) {
-            if (nav_item.hasOwnProperty('has_sub_nav_items') && nav_item.has_sub_nav_items) {
-                return '/';
-            }
-            var page = this.$dataProvider.getPage(nav_item.target_page_index);
-            return page.path;
         }
     }
 }

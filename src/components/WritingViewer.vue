@@ -1,6 +1,6 @@
 <template>
     <div class="main-body">
-        <h1>Writing viewer {{ $route.params.index }}</h1>
+        <h1>Writing viewer {{ $route.params.page }}</h1>
     </div>
 </template>
 <style scoped>

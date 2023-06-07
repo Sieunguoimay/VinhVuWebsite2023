@@ -8,8 +8,9 @@ const router = createRouter({
     routes: [
         { path: '/', component: Home },
         { path: '/contact', component: Contact },
-        { path: '/service/:index?', component: WritingViewer },
-        { path: '/solution/:index?', component: WritingViewer },
+        { path: '/services/:page?', component: WritingViewer },
+        { path: '/solutions/:page?', component: WritingViewer },
+        { path: '/news/:page?', component: WritingViewer },
     ]
 });
 

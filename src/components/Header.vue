@@ -26,20 +26,22 @@
 
     <div class="navigation-panel" :style="{ top: navPanelPosition.y + 'px', left: navPanelPosition.x + 'px' }"
         v-if="isNavPanelShowing" @mouseover="cancelHideNavPanel" @mouseleave="hideNavPanel">
-        <div class="nav-panel-item nav-item"
-            v-for="sub_nav_item in getSelectedSubNavItems(navigation.nav_items, selectedNavItemId)" :key="sub_nav_item.id">
-            <router-link :to="getPagePath(sub_nav_item)">{{ getPageName(sub_nav_item) }}</router-link>
+        <div class="nav-panel-item nav-item" v-for="sub_nav_item in getSelectedSubNavItems(selectedNavItemIndex)"
+            :key="sub_nav_item.path">
+            <router-link :to="sub_nav_item.path">{{ sub_nav_item.display_name }}</router-link>
         </div>
     </div>
 
-    <div class="navigation-panel-fullscreen sticky-header" v-if="isFullScreenNavPanelShowing">
-        <div class="nav-item" v-for="nav_item in navigation.nav_items" :key="nav_item.id"
+    <div class="navigation-panel-fullscreen" v-if="isFullScreenNavPanelShowing">
+        <div class="nav-item" v-for="nav_item in navigation.nav_items" :key="nav_item.path"
             @click="onFullscreenNavItemClicked(nav_item)">
-            <router-link :to="getPagePath(nav_item)">{{ getPageName(nav_item) }}</router-link>
-            <div class="nav-panel-item nav-item" v-if="selectedNavItemId == nav_item.id"
-                v-for="sub_nav_item in getSelectedSubNavItems(navigation.nav_items, nav_item.id)" :key="sub_nav_item.id">
-                <router-link :to="getPagePath(sub_nav_item)" @click="toggleFullScreenNavigationPanel()">{{
-                    getPageName(sub_nav_item) }}</router-link>
+
+            <router-link :to="nav_item.path">{{ nav_item.display_name }}</router-link>
+
+            <div class="nav-panel-item nav-item" v-if="selectedNavItemIndex == navigation.nav_items.indexOf(nav_item)"
+                v-for="sub_nav_item in (nav_item.sub_nav_items)" :key="sub_nav_item.path">
+                <router-link :to="sub_nav_item.path" @click="toggleFullScreenNavigationPanel()">{{
+                    sub_nav_item.display_name }}</router-link>
             </div>
         </div>
     </div>
@@ -258,7 +260,7 @@ img {
 <script>
 import { objectToString } from '@vue/shared';
 import { reactive, ref } from 'vue';
-import NavigationBar from './NavigationBar.vue'
+import NavigationBar from './tiny/NavigationBar.vue'
 
 export default {
     components: {
@@ -271,7 +273,7 @@ export default {
     },
     setup() {
         const isFullScreenNavPanelShowing = ref(false);
-        const selectedNavItemId = ref(0);
+        const selectedNavItemIndex = ref(0);
         const isNavPanelShowing = ref(false);
         const navPanelPosition = reactive({ x: 0, y: 0 });
         let hideTimeout;
@@ -293,18 +295,18 @@ export default {
             clearTimeout(hideTimeout);
         };
 
-        const onNavItemHovered = (event, nav_item) => {
+        const onNavItemHovered = (event, nav_item_index, nav_item) => {
             if (nav_item.has_sub_nav_items) {
                 showNavPanel(event);
-                setSelectedNavItem(nav_item);
+                setSelectedNavItem(nav_item_index);
             }
         }
-        const setSelectedNavItem = (nav_item) => {
-            selectedNavItemId.value = nav_item.id;
+        const setSelectedNavItem = (nav_item_index) => {
+            selectedNavItemIndex.value = nav_item_index;
         };
 
         return {
-            selectedNavItemId,
+            selectedNavItemIndex,
             isNavPanelShowing,
             isFullScreenNavPanelShowing,
             navPanelPosition,
@@ -318,7 +320,7 @@ export default {
     mounted() {
         window.addEventListener("scroll", this.handleScroll);
         this.$eventBus.$on("navigation_bar_nav_item_hovered", (data) => {
-            this.onNavItemHovered(data.event, data.nav_item);
+            this.onNavItemHovered(data.event, data.nav_item_index,data.nav_item);
         });
         this.$eventBus.$on("navigation_bar_nav_item_unhovered", (data) => {
             this.hideNavPanel(data.event);
@@ -340,8 +342,8 @@ export default {
                 this.showScrollIndicator = false;
             }
         },
-        getSelectedSubNavItems(nav_items, selectedNavItemId) {
-            var selectedNavItem = nav_items.find(i => i.id === selectedNavItemId);
+        getSelectedSubNavItems(selectedNavItemIndex) {
+            var selectedNavItem = this.navigation.nav_items[selectedNavItemIndex];
             if (selectedNavItem == null) {
                 return [];
             }
@@ -349,31 +351,18 @@ export default {
 
                 return [];
             }
-            return this.$dataProvider.getSubNavItems(selectedNavItem);
-        },
-        getPageName(nav_item) {
-            if (nav_item.hasOwnProperty('has_sub_nav_items') && nav_item.has_sub_nav_items) {
-                return nav_item.display_name;
-            }
-            var page = this.$dataProvider.getPage(nav_item.target_page_index);
-            return page.name;
-        },
-        getPagePath(nav_item) {
-            if (nav_item.hasOwnProperty('has_sub_nav_items') && nav_item.has_sub_nav_items) {
-                return '/';
-            }
-            var page = this.$dataProvider.getPage(nav_item.target_page_index);
-            return page.path;
+            return selectedNavItem.sub_nav_items;
         },
         toggleFullScreenNavigationPanel() {
             this.isFullScreenNavPanelShowing = !this.isFullScreenNavPanelShowing;
-            this.selectedNavItemId = -1;
+            this.selectedNavItemIndex = -1;
         },
         onFullscreenNavItemClicked(nav_item) {
+            var nav_item_index = this.navigation.nav_items.indexOf(nav_item);
             if (nav_item.has_sub_nav_items) {
-                if (this.selectedNavItemId == -1 || this.selectedNavItemId != nav_item.id)
-                    this.selectedNavItemId = nav_item.id;
-                else this.selectedNavItemId = -1;
+                if (this.selectedNavItemIndex == -1 || this.selectedNavItemIndex != nav_item_index)
+                    this.selectedNavItemIndex = nav_item_index;
+                else this.selectedNavItemIndex = -1;
             } else {
                 this.toggleFullScreenNavigationPanel();
             }

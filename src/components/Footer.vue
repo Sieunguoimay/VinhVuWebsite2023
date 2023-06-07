@@ -1,5 +1,6 @@
 <template>
     <div class="footer">
+        <PriceConsultantBar />
         <div class="upper">
             <div class="footer-content left info">
                 <p>{{ info.texts.find(t => t.key == "website_full_name").value.toUpperCase() }}</p>
@@ -8,12 +9,12 @@
                 <p>{{ info.texts.find(t => t.key == "email").value }}</p>
             </div>
             <div class="middle footer-content navigation">
-                <div class="nav-items-group" v-for="group in navigation.nav_items.filter(i => i.has_sub_nav_items)">
+                <div class="nav-items-group" v-for="nav_item in navigation.nav_items.filter(i => i.has_sub_nav_items)">
                     <div class="group-name">
-                        <p>{{ group.display_name.toUpperCase() }}</p>
+                        <p>{{ nav_item.display_name.toUpperCase() }}</p>
                     </div>
-                    <div class="sub-nav-item" v-for="item in this.$dataProvider.getSubNavItems(group)">
-                        <router-link :to="this.$dataProvider.getPage(item.target_page_index).path">{{
+                    <div class="sub-nav-item" v-for="item in nav_item.sub_nav_items">
+                        <router-link :to="item.path">{{
                             item.display_name
                         }}</router-link>
                     </div>
@@ -119,7 +120,10 @@ img {
 .info {}
 </style>
 <script>
+import PriceConsultantBar from "./tiny/PriceConsultantBar.vue"
+
 export default {
+    components: { PriceConsultantBar },
     data() {
         return this.$dataProvider.getData();
     }
