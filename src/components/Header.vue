@@ -1,26 +1,21 @@
 <template>
-    <div class="header header-container">
-        <div class="logo header-item" id="main-header">
-            <router-link :to="`/${navigation.nav_items[0].target_page_index}`">
-                <img :src="'/src/assets' + info.logo.img" :alt="info.logo.alt_string">
-            </router-link>
+    <div class="header ">
+        <div class="header-container clamped-content-width-center">
+            <div class="logo header-item" id="main-header">
+                <router-link :to="`${navigation.nav_items[0].target_page_index}`">
+                    <img :src="'/src/assets' + info.logo.img" :alt="info.logo.alt_string">
+                </router-link>
 
-        </div>
-        <div class="nav-button" @click="toggleFullScreenNavigationPanel()">
-
-        </div>
-        <div class="header-right">
-            <div class="header-top-right">
-                <div class="header-handy-info">
-                    <span>Hotline: 123</span>
-                    <span>Email: ABC@abcd.com</span>
-                    <span>Nothing</span>
-                </div>
             </div>
-            <!-- <div class="header-bottom-right">
+            <div class="nav-button" @click="toggleFullScreenNavigationPanel()">
 
-            </div> -->
-            <NavigationBar class="header-item header-bottom-right" />
+            </div>
+            <div class="header-right">
+                <div class="header-top-right">
+                    <HeaderHandyInfo />
+                </div>
+                <NavigationBar class="header-item header-bottom-right" />
+            </div>
         </div>
     </div>
 
@@ -61,26 +56,18 @@ img {
 } */
 
 .header {
-    /* display: flex;
-    flex-direction: row;
-    flex-wrap: wrap-reverse;
-    align-items: stretch; */
-    /* box-shadow: 0 0 0 2px #f0f0f0; */
-    /* gap: 5%; */
-    background-color: rgb(236, 236, 236);
+    /* background-color: rgb(236, 236, 236); */
+    background-color: white;
     z-index: 3;
+    margin-bottom: 15px;
+
 }
 
 .header-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap-reverse;
-    /* align-items: stretch; */
-    /* box-shadow: 0 0 0 2px #f0f0f0; */
-    /* gap: 5%; */
-    /* background-color: rgb(236, 236, 236); */
-    /* z-index: 3; */
-    height: 100px;
+    height: 70px;
 }
 
 .header-right {
@@ -96,53 +83,21 @@ img {
     justify-content: end;
 }
 
-.header-bottom-right {
-    /* flex:1; */
-}
+.header-bottom-right {}
 
-.header-item {
-    /* align-self: flex-end; */
-}
+.header-item {}
 
-.header-handy-info {
-    color: rgb(127, 141, 152);
-    display: flex;
-    flex-direction: row;
-    justify-content: stretch;
-    padding-top: 3px;
-}
-
-.header-handy-info span {
-    flex-grow: 1;
-    text-align: center;
-}
-
-.header-handy-info>*:not(:last-child) {
-    /* border-right: 1px solid black; */
-    /* padding-right: 10px; */
-    /* Optional: Add some spacing between the elements */
-}
-
-.header-handy-info>*:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    height: 50%;
-    border-right: 1px solid rgb(194, 194, 194);
+.sticky-header {
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
 }
 
 @media (min-width: 768px) {
 
     .logo {
-        /* height: 100px; */
         max-height: 100%;
         width: 20%;
         display: flex;
         justify-content: center;
-        /* align-items: center; */
-        /* min-width: fit-content; */
     }
 
 
@@ -173,7 +128,6 @@ img {
         width: 100%;
         display: flex;
         justify-content: center;
-        /* max-height: 100%; */
     }
 
     .header-handy-info {
@@ -237,17 +191,26 @@ img {
     flex-direction: column;
     align-items: stretch;
 
+    padding-top: 5px;
+    padding-bottom: 5px;
+
     width: 400px;
     max-width: 100%;
 
     z-index: 2;
     position: fixed;
-
-    background-color: rgb(255, 230, 230);
+    background-color: white;
+    /* background-color: rgb(255, 230, 230); */
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
 }
 
-.nav-item a {
-    font-size: large;
+.nav-panel-item {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.nav-panel-item a {
+    font-size: 16px;
     text-decoration: none;
     color: inherit;
 }
@@ -261,10 +224,12 @@ img {
 import { objectToString } from '@vue/shared';
 import { reactive, ref } from 'vue';
 import NavigationBar from './tiny/NavigationBar.vue'
+import HeaderHandyInfo from './tiny/header/HeaderHandyInfo.vue'
 
 export default {
     components: {
-        NavigationBar
+        NavigationBar,
+        HeaderHandyInfo
     },
     data() {
         var d = this.$dataProvider.getData();
@@ -320,7 +285,7 @@ export default {
     mounted() {
         window.addEventListener("scroll", this.handleScroll);
         this.$eventBus.$on("navigation_bar_nav_item_hovered", (data) => {
-            this.onNavItemHovered(data.event, data.nav_item_index,data.nav_item);
+            this.onNavItemHovered(data.event, data.nav_item_index, data.nav_item);
         });
         this.$eventBus.$on("navigation_bar_nav_item_unhovered", (data) => {
             this.hideNavPanel(data.event);

@@ -22,6 +22,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color:rgb(201, 201, 201);
 }
 
 .slide {

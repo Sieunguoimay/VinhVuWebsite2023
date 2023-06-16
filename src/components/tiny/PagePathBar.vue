@@ -12,10 +12,9 @@
 .container {
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    background-color: rgb(210, 210, 210);
-    font-size: small;
+    /* background-color: rgb(210, 210, 210); */
+    font-size: .7em;/*1.2svb;*/
+    margin-bottom: 15px;
 }
 
 .path {

@@ -1,7 +1,7 @@
 <template>
     <div class="footer">
         <PriceConsultantBar />
-        <div class="upper">
+        <div class="upper clamped-content-width-center">
             <div class="footer-content left info">
                 <p>{{ info.texts.find(t => t.key == "website_full_name").value.toUpperCase() }}</p>
                 <p>{{ info.texts.find(t => t.key == "address").value }}</p>

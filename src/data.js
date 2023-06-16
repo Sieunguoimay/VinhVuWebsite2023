@@ -1,6 +1,9 @@
+import router from "./router"
 export default {
+    data: null,
     getData() {
-        var data = {
+        if (this.data != null) return this.data;
+        this.data = {
             info: {
                 texts: [{
                     key: "website_url",
@@ -103,10 +106,9 @@ export default {
                 content: "Contact",
             }, ]
         };
-        data.info.logo.alt_string = "Website Name";
-        data.navigation.nav_items = this.createNavItems(data);
-        console.log(data.navigation.nav_items);
-        return data;
+        this.data.info.logo.alt_string = "Website Name";
+        this.data.navigation.nav_items = this.createNavItems(this.data);
+        return this.data;
     },
     createNavItems(data) {
         var nav_items = [];
@@ -115,24 +117,21 @@ export default {
             var navGroup = this.findNavGroup(data, page.path);
             if (navGroup != null) {
                 var foundNavGroupItem = nav_items.find(i => i.path == navGroup.path);
-                if (foundNavGroupItem != null) {
-                    foundNavGroupItem.sub_nav_items.push({
-                        display_name: page.name,
-                        path: page.path
-                    });
-                } else {
-                    var subNavItemsGroup = this.createNavGroupItem(navGroup);
-                    subNavItemsGroup.sub_nav_items.push({
-                        display_name: page.name,
-                        path: page.path
-                    });
-                    nav_items.push(subNavItemsGroup);
+                if (foundNavGroupItem == null) {
+                    foundNavGroupItem = this.createNavGroupItem(navGroup);
+                    nav_items.push(foundNavGroupItem);
                 }
+                foundNavGroupItem.sub_nav_items.push({
+                    display_name: page.name,
+                    path: page.path,
+                    is_current: false,
+                });
             } else {
                 nav_items.push({
                     has_sub_nav_items: false,
                     path: page.path,
-                    display_name: page.name
+                    display_name: page.name,
+                    is_current: false,
                 });
             }
         }
@@ -163,5 +162,10 @@ export default {
             return [page.name];
         }
         return [navGroup.display_name, page.name]
+    },
+    updateNavigationItemCurrent(currentPath) {
+        this.data.navigation.nav_items.forEach(element => {
+            element.is_current = element.path == currentPath;
+        });
     }
 }

@@ -7,16 +7,20 @@ import PagePathBar from "./components/tiny/PagePathBar.vue"
 <template>
   <main>
     <Header />
-    <PagePathBar />
-    <router-view />
+    <PagePathBar class="clamped-content-width-center"/>
+    <router-view class="clamped-content-width-center"/>
     <Footer />
     <!-- <PriceConsultantBar /> -->
   </main>
 </template>
 
 <style scoped>
-main {
+/* main {
   max-width: 1200px;
   margin: 0 auto;
+} */
+@font-face {
+  font-family: "Roboto Condensed";
+  src: url("./fonts/RobotoCondensed-Regular.ttf") format("truetype");
 }
 </style>
