@@ -14,7 +14,7 @@
     padding-right: 10px;
     /* background-color: rgb(210, 210, 210); */
     font-size: .7em;/*1.2svb;*/
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .path {
@@ -30,6 +30,7 @@
 .path span {
     /* padding-left:10px;
     padding-right:10px; */
+    color:rgb(168, 168, 168);
 }
 
 .path img {

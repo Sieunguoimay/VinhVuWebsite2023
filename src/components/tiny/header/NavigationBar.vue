@@ -29,9 +29,10 @@
 .navigation {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: right;
+    /* justify-content: end; */
     gap:40px;
     /* justify-content: space-evenly; */
+    /* flex: 1; */
 }
 
 .nav-item {
@@ -46,7 +47,6 @@
 }
 
 .nav-item a {
-    font-size: large;
     text-decoration: none;
     font-size: small;
     font-weight: bold;
@@ -69,7 +69,8 @@
 }
 
 .nav-item-is-not-current a:hover {
-    color: #dd3333;
+    /* color: #dd3333; */
+    color: #379237;
     transition: color 0.2s;
 }
 
@@ -87,14 +88,14 @@
     bottom: -2px;
     width: 100%;
     height: 2px;
-    background-color: #dd3333;
+    background-color: #379237;
     transform: translateX(-50%);
     transform-origin: center;
     animation: underline 0.3s forwards;
 }
 
 .nav-item-is-current a {
-    color: #dd3333;
+    color: #379237;
 }
 
 @keyframes underline {

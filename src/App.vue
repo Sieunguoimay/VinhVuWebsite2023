@@ -15,10 +15,11 @@ import PagePathBar from "./components/tiny/PagePathBar.vue"
 </template>
 
 <style scoped>
-/* main {
-  max-width: 1200px;
-  margin: 0 auto;
-} */
+main {
+  /* max-width: 1200px;
+  margin: 0 auto; */
+  /* background-color: aliceblue; */
+}
 @font-face {
   font-family: "Roboto Condensed";
   src: url("./fonts/RobotoCondensed-Regular.ttf") format("truetype");

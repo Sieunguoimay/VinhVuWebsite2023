@@ -1,7 +1,7 @@
 <template>
     <div class="header-handy-info">
-        <span>Hotline: 123</span>
-        <span>Email: ABC@abcd.com</span>
+        <span>Hotline: 123</span><span>|</span>
+        <span>Email: ABC@abcd.com</span><span>|</span>
         <span>Nothing</span>
     </div>
 </template>
@@ -10,21 +10,23 @@
     color: rgb(127, 141, 152);
     display: flex;
     flex-direction: row;
-    justify-content: end;
-    padding-top: 2px;
-    gap:10px;
+    /* justify-content: end; */
+    align-items: center;
+    /* padding-top: 2px; */
+    gap: 10px;
     font-size: small;
 }
 
- .header-handy-info span{
+.header-handy-info span {
     /* flex-grow: 1;
     text-align: center; */
 }
-.header-handy-info>*:not(:last-child) {
-    /* border-right: 1px solid black; */
-    /* padding-right: 10px; */
-    /* Optional: Add some spacing between the elements */
-}
+
+/* .header-handy-info>*:not(:last-child) { */
+/* border-right: 1px solid black; */
+/* padding-right: 10px; */
+/* Optional: Add some spacing between the elements */
+/* } */
 
 /* .header-handy-info>*:not(:last-child)::after {
     content: "";

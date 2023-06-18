@@ -1,30 +1,32 @@
 <template>
-    <div class="container">
-        <div class="label">
-            <p>{{ label }}</p>
-        </div>
-        <div class="contact-media">
-            <a href="#" class="contact-media-item" v-for="item in contact_items" :key="item.url">
-                <img :src="item.img" :alt="item.img" />
-            </a>
+    <div>
+        <div class="container">
+            <div class="label">
+                <p>{{ label }}</p>
+            </div>
+            <div class="contact-media">
+                <a href="#" class="contact-media-item" v-for="item in contact_items" :key="item.url">
+                    <img :src="item.img" :alt="item.img" />
+                </a>
+            </div>
         </div>
     </div>
 </template>
 <style scoped>
 .container {
-    background-color: orange;
+    background-color: #82CD47;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 .label {
     font-size: large;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,7 +36,6 @@
     width: fit-content;
     display: flex;
     flex-direction: row;
-    gap: 10px;
 }
 
 .contact-media-item {
@@ -45,7 +46,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: bisque;
+    background-color: #82CD47;
 }
 
 .contact-media-item img {
@@ -65,10 +66,10 @@ export default {
                     img: "./src/assets/socials/icon_zalo.png"
                 }, {
                     url: "#",
-                    img: "./src/assets/socials/icon_zalo.png"
+                    img: "./src/assets/headset.png"
                 }, {
                     url: "#",
-                    img: "./src/assets/socials/icon_zalo.png"
+                    img: "./src/assets/email.png"
                 }
             ]
         }

@@ -41,9 +41,11 @@
         </div>
     </div>
 
-    <div class="header sticky-header clamped-content-width-center" v-if="showScrollIndicator">
-        <!-- <HeaderHandyInfo class="header-item" /> -->
-        <NavigationBar class="header-item" />
+    <div class="header sticky-header" v-if="showScrollIndicator">
+        <div class="sticky-header-content clamped-content-width-center">
+            <NavigationBar />
+            <HeaderHandyInfo />
+        </div>
     </div>
 </template>
 
@@ -60,8 +62,7 @@ img {
     /* background-color: rgb(236, 236, 236); */
     background-color: white;
     z-index: 3;
-    margin-bottom: 15px;
-
+    margin-bottom: 10px;
 }
 
 .header-container {
@@ -76,11 +77,10 @@ img {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: stretch;
+    justify-content: space-between;
 }
 
 .header-top-right {
-    flex: 1;
     display: flex;
     justify-content: end;
 }
@@ -91,13 +91,13 @@ img {
 
 .sticky-header {
     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
+}
+.sticky-header-content{
     display: flex;
     flex-direction: row;
-    /* justify-content: end; */
+    justify-content: space-between;
 }
-
-.sticky-header NavigationBar {
-}
+.sticky-header NavigationBar {}
 
 .sticky-header HeaderHandyInfo {}
 
@@ -117,10 +117,10 @@ img {
         z-index: 2;
     }
 
-    .header-handy-info {
+    /* .header-handy-info {
         width: 70%;
         height: 30px;
-    }
+    } */
 
     .nav-button {
         display: none;
@@ -140,10 +140,10 @@ img {
         justify-content: center;
     }
 
-    .header-handy-info {
+    /* .header-handy-info {
         width: 100%;
         height: 30px;
-    }
+    } */
 
     .nav-button {
         display: block;

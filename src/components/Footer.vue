@@ -1,6 +1,6 @@
 <template>
+    <PriceConsultantBar class="clamped-content-width-center" />
     <div class="footer">
-        <PriceConsultantBar />
         <div class="upper clamped-content-width-center">
             <div class="footer-content left info">
                 <p>{{ info.texts.find(t => t.key == "website_full_name").value.toUpperCase() }}</p>
@@ -26,10 +26,11 @@
                 </a>
             </div>
         </div>
-        <div class="footer-lower">
-            <a :href="info.texts.find(t => t.key == 'website_url').value">{{ info.texts.find(t => t.key ==
-                "website_url").label }}</a>
-        </div>
+
+    </div>
+    <div class="footer-lower clamped-content-width-center">
+        <a :href="info.texts.find(t => t.key == 'website_url').value">{{ info.texts.find(t => t.key ==
+            "website_url").label }}</a>
     </div>
 </template>
 <style scoped>
@@ -47,7 +48,7 @@ img {
     align-items: stretch;
     /* min-height: 200px; */
 
-    background-color: rgb(152, 161, 168);
+    background-color: #ffffff;
 }
 
 .upper {
@@ -58,23 +59,25 @@ img {
     justify-content: space-evenly;
     height: 80%;
     margin-top: 20px;
+
 }
 
 .footer-lower {
     /* border-top: 1px solid rgb(56, 65, 80); */
     min-height: 50px;
-    background-color: rgb(46, 79, 128);
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-top: 1px solid rgb(235, 235, 235);
 }
 
 .footer-lower a {
-    color: inherit;
+    color: #313b31;
 }
 
 .footer-content {
-    color: aliceblue;
+    color: gray;
     max-width: 100%;
     min-width: 350px;
     margin-bottom: 20px;
@@ -88,6 +91,18 @@ img {
 
 .nav-items-group {
     flex: 1;
+}
+
+.group-name p {
+    font-weight: bold;
+}
+
+.info {
+    font-style: italic;
+}
+
+.sub-nav-item {
+    font-style: italic;
 }
 
 /* .sub-nav-item { */
@@ -124,11 +139,11 @@ import PriceConsultantBar from "./tiny/PriceConsultantBar.vue"
 
 export default {
     components: { PriceConsultantBar },
-    computed:{
-        navigation(){
+    computed: {
+        navigation() {
             return this.$store.state.data.navigation;
         },
-        info(){
+        info() {
             return this.$store.state.data.info;
         }
     }
