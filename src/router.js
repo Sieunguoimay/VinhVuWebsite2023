@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from './components/Home.vue';
 import Contact from './components/Contact.vue';
 import WritingViewer from './components/WritingViewer.vue';
-import $dataProvider from "./data"
+import store from './store'
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -15,7 +15,7 @@ const router = createRouter({
     ]
 });
 router.beforeEach((to, from, next) => {
-    $dataProvider.updateNavigationItemCurrent(to.path);
+    store.dispatch('updateNavigationItemCurrent',to.path);
     next();
 });
 

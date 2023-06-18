@@ -1,4 +1,3 @@
-import router from "./router"
 export default {
     data: null,
     getData() {
@@ -163,9 +162,4 @@ export default {
         }
         return [navGroup.display_name, page.name]
     },
-    updateNavigationItemCurrent(currentPath) {
-        this.data.navigation.nav_items.forEach(element => {
-            element.is_current = element.path == currentPath;
-        });
-    }
 }

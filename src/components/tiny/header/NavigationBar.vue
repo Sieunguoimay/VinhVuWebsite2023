@@ -1,15 +1,12 @@
 <template>
     <div class="navigation header-item">
-
-        <div v-for="nav_item in navigation.nav_items" :key="nav_item.id"
-            :class="{ 'nav-item': true }"
+        <div v-for="nav_item in navigation.nav_items" :key="nav_item.id" class="nav-item"
             @mouseover="onNavItemHovered($event, nav_item)"
-            @mouseleave="{ if(nav_item.has_sub_nav_items) onNavItemUnhovered($event); }">
+            @mouseleave="{ if(nav_item.has_sub_nav_items) onNavItemUnhovered($event); }"
+            :class="{ 'nav-item-is-current': nav_item.is_current, 'nav-item-is-not-current': !nav_item.is_current }">
 
-            <router-link :to="nav_item.path" v-if="!nav_item.has_sub_nav_items"
-            :class="{'nav-item-is-current': isCurrent(nav_item) }"
-            >{{
-                nav_item.display_name.toUpperCase() }} {{ nav_item.is_current }}</router-link>
+            <router-link :to="nav_item.path" v-if="!nav_item.has_sub_nav_items">{{
+                nav_item.display_name.toUpperCase() }}</router-link>
             <a v-if="nav_item.has_sub_nav_items">{{ nav_item.display_name.toUpperCase() }}
                 <img src="/src/assets/down-arrow.png" alt="Down Arrow" v-if="nav_item.has_sub_nav_items">
             </a>
@@ -32,8 +29,9 @@
 .navigation {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    /* flex: 1; */
+    justify-content: right;
+    gap:40px;
+    /* justify-content: space-evenly; */
 }
 
 .nav-item {
@@ -52,6 +50,7 @@
     text-decoration: none;
     font-size: small;
     font-weight: bold;
+    padding-top: 3px;
 
     /* pointer-events: none; */
     /* color: gray; */
@@ -64,12 +63,12 @@
     pointer-events: none;
 }
 
-.nav-item a:not(:hover) {
+.nav-item-is-not-current a:not(:hover) {
     color: gray;
     transition: color 0.2s;
 }
 
-.nav-item a:hover {
+.nav-item-is-not-current a:hover {
     color: #dd3333;
     transition: color 0.2s;
 }
@@ -80,7 +79,8 @@
     position: relative;
 }
 
-.nav-item:hover::after {
+.nav-item:hover::after,
+.nav-item-is-current:after {
     content: "";
     position: absolute;
     left: 50%;
@@ -93,8 +93,8 @@
     animation: underline 0.3s forwards;
 }
 
-.nav-item-is-current {
-    background-color: #dd3333;
+.nav-item-is-current a {
+    color: #dd3333;
 }
 
 @keyframes underline {
@@ -113,23 +113,30 @@
 }
 </style>
 <script>
+import { ref } from 'vue';
+
 export default {
-    data() {
-        return this.$dataProvider.getData();
+    computed: {
+        navigation() {
+            return this.$store.state.data.navigation;
+        },
+        info() {
+            return this.$store.state.data.info;
+        }
+    },
+    mounted() {
+    },
+    beforeDestroy() {
     },
     methods: {
         onNavItemHovered(event, nav_item) {
             var params = { event: event, nav_item_index: this.navigation.nav_items.indexOf(nav_item), nav_item: nav_item };
             this.$eventBus.$emit("navigation_bar_nav_item_hovered", params);
+            // nav_item.is_current = !nav_item.is_current;
         },
         onNavItemUnhovered(event) {
             var params = { event: event };
             this.$eventBus.$emit("navigation_bar_nav_item_unhovered", params);
-        },
-        isCurrent(nav_item){
-            console.log("HEY");
-            console.log(nav_item);
-            return true;//nav_item.is_current;
         }
     }
 }

@@ -41,14 +41,10 @@
 }
 </style>
 <script>
-import { useRouter } from 'vue-router';
 export default {
-    data() {
-        return this.$dataProvider.getData();
-    },
     methods: {
         getDisplayPath() {
-            return this.$dataProvider.getPageDisplayPath(this, this.$route.path);
+            return this.$dataProvider.getPageDisplayPath(this.$store.state.data, this.$route.path);
         }
     }
 }

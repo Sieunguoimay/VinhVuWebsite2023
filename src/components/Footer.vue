@@ -124,8 +124,13 @@ import PriceConsultantBar from "./tiny/PriceConsultantBar.vue"
 
 export default {
     components: { PriceConsultantBar },
-    data() {
-        return this.$dataProvider.getData();
+    computed:{
+        navigation(){
+            return this.$store.state.data.navigation;
+        },
+        info(){
+            return this.$store.state.data.info;
+        }
     }
 }
 </script>

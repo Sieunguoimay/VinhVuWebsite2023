@@ -21,8 +21,8 @@
 
     <div class="navigation-panel" :style="{ top: navPanelPosition.y + 'px', left: navPanelPosition.x + 'px' }"
         v-if="isNavPanelShowing" @mouseover="cancelHideNavPanel" @mouseleave="hideNavPanel">
-        <div class="nav-panel-item nav-item" v-for="sub_nav_item in getSelectedSubNavItems(selectedNavItemIndex)"
-            :key="sub_nav_item.path">
+        <div class="nav-item" v-for="sub_nav_item in getSelectedSubNavItems(selectedNavItemIndex)" :key="sub_nav_item.path"
+            :class="{ 'sub-nav-item-is-current': sub_nav_item.is_current, 'nav-panel-item': !sub_nav_item.is_current }">
             <router-link :to="sub_nav_item.path">{{ sub_nav_item.display_name }}</router-link>
         </div>
     </div>
@@ -41,7 +41,8 @@
         </div>
     </div>
 
-    <div class="header sticky-header" v-if="showScrollIndicator">
+    <div class="header sticky-header clamped-content-width-center" v-if="showScrollIndicator">
+        <!-- <HeaderHandyInfo class="header-item" /> -->
         <NavigationBar class="header-item" />
     </div>
 </template>
@@ -68,6 +69,7 @@ img {
     flex-direction: row;
     flex-wrap: wrap-reverse;
     height: 70px;
+    border-bottom: 1px solid rgb(235, 235, 235);
 }
 
 .header-right {
@@ -89,7 +91,15 @@ img {
 
 .sticky-header {
     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    /* justify-content: end; */
 }
+
+.sticky-header NavigationBar {
+}
+
+.sticky-header HeaderHandyInfo {}
 
 @media (min-width: 768px) {
 
@@ -209,7 +219,8 @@ img {
     padding-right: 10px;
 }
 
-.nav-panel-item a {
+.nav-panel-item a,
+.sub-nav-item-is-current a {
     font-size: 16px;
     text-decoration: none;
     color: inherit;
@@ -219,11 +230,17 @@ img {
     background-color: rgb(255, 206, 142);
     color: white;
 }
+
+.sub-nav-item-is-current {
+    color: #dd3333;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 </style>
 <script>
 import { objectToString } from '@vue/shared';
 import { reactive, ref } from 'vue';
-import NavigationBar from './tiny/NavigationBar.vue'
+import NavigationBar from './tiny/header/NavigationBar.vue'
 import HeaderHandyInfo from './tiny/header/HeaderHandyInfo.vue'
 
 export default {
@@ -231,10 +248,19 @@ export default {
         NavigationBar,
         HeaderHandyInfo
     },
+    computed: {
+        navigation() {
+            return this.$store.state.data.navigation;
+        },
+        info() {
+            return this.$store.state.data.info;
+        }
+    }
+    ,
     data() {
-        var d = this.$dataProvider.getData();
-        d.showScrollIndicator = false;
-        return d;
+        return {
+            showScrollIndicator: false,
+        }
     },
     setup() {
         const isFullScreenNavPanelShowing = ref(false);
