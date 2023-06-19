@@ -1,7 +1,7 @@
 <template>
     <PriceConsultantBar class="clamped-content-width-center" />
-    <div class="footer">
-        <div class="upper clamped-content-width-center">
+    <div class="footer  clamped-content-width-center">
+        <div class="upper">
             <div class="footer-content left info">
                 <p>{{ info.texts.find(t => t.key == "website_full_name").value.toUpperCase() }}</p>
                 <p>{{ info.texts.find(t => t.key == "address").value }}</p>
@@ -9,7 +9,7 @@
                 <p>{{ info.texts.find(t => t.key == "email").value }}</p>
             </div>
             <div class="middle footer-content navigation">
-                <div class="nav-items-group" v-for="nav_item in navigation.nav_items.filter(i => i.has_sub_nav_items)">
+                <div class="nav-items-group" v-for="nav_item in navigation.nav_items.filter(i => i.has_sub_nav_items).sort((a,b)=>b.display_name.localeCompare(a.display_name))">
                     <div class="group-name">
                         <p>{{ nav_item.display_name.toUpperCase() }}</p>
                     </div>
@@ -20,17 +20,21 @@
                     </div>
                 </div>
             </div>
-            <div class="right footer-content social">
-                <a v-for="social in info.socials" :href="social.url" :key="social.name" target="_blank">
-                    <img :src="'/src/assets' + social.img" :alt="social.name">
-                </a>
+            <div class="right footer-content">
+                <div class="social-title">
+                    <p>SOCIAL MEDIA</p>
+                </div>
+                <div class="social">
+                    <a v-for="social in info.socials" :href="social.url" :key="social.name" target="_blank">
+                        <img :src="'/src/assets' + social.img" :alt="social.name">
+                    </a>
+                </div>
             </div>
         </div>
 
     </div>
     <div class="footer-lower clamped-content-width-center">
-        <a :href="info.texts.find(t => t.key == 'website_url').value">{{ info.texts.find(t => t.key ==
-            "website_url").label }}</a>
+        <a :href="info.website_url.url">{{ info.website_url.label }}</a>
     </div>
 </template>
 <style scoped>
@@ -56,7 +60,7 @@ img {
     flex-direction: row;
     align-items: stretch;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     height: 80%;
     margin-top: 20px;
 
@@ -75,18 +79,27 @@ img {
 .footer-lower a {
     color: #313b31;
 }
-
 .footer-content {
+
     color: gray;
-    max-width: 100%;
-    min-width: 350px;
     margin-bottom: 20px;
+}
+
+.left,
+.right {
+    flex: 1;
+    min-width: 200px;
+}
+.middle {
+    flex: 2;
+    min-width: 400px;
 }
 
 .navigation {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap:10px;
 }
 
 .nav-items-group {
@@ -112,6 +125,17 @@ img {
 .sub-nav-item a {
     text-decoration: none;
     color: inherit;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-title p {
+    font-style: italic;
 }
 
 .social {

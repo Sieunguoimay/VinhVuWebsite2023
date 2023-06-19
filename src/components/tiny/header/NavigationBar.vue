@@ -54,6 +54,7 @@
 
     /* pointer-events: none; */
     /* color: gray; */
+    cursor:pointer;
 }
 
 .nav-item img {

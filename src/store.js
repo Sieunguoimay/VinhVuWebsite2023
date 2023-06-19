@@ -1,10 +1,11 @@
 import { createStore } from 'vuex'
 import $dataProvider from "./data"
+import axios from 'axios';
 
 const store = createStore({
     state() {
         return {
-            data: $dataProvider.getData()
+            data: null
         }
     },
     mutations: {
@@ -19,14 +20,41 @@ const store = createStore({
                     i.is_current = currentPath == i.path;
                 }
             });
-        }
-    }, actions: {
-        updateNavigationItemCurrent(state, currentPath) {
-            this.commit('updateNavigationItemCurrent', currentPath)
         },
-    }, getters: {
+        setData(state, data) {
+            state.data = data;
+        }
+    },
+    actions: {
+        updateNavigationItemCurrent(state, currentPath) {
+            if (this.state.data != null) {
+                this.commit('updateNavigationItemCurrent', currentPath)
+            }
+        },
+        loadData(state, currentPath) {
+            // this.commit('setData', $dataProvider.setupStatefulData(jsonData));
+            // this.dispatch("updateNavigationItemCurrent", currentPath);
 
-    }, modules: {
+            import ('/src/data/website-config.json')
+            .then(({ default: json }) => {
+                this.commit('setData', $dataProvider.setupStatefulData(json));
+                this.dispatch("updateNavigationItemCurrent", currentPath);
+            });
+            // axios.get('/src/data/website-config.json')
+            //     .then(response => {
+            //         console.log(response);
+            //         this.commit('setData', $dataProvider.setupStatefulData(response.data));
+            //         this.dispatch("updateNavigationItemCurrent", currentPath);
+            //     })
+            //     .catch(error => {
+            //         console.error(error);
+            //     });
+        }
+    },
+    getters: {
+
+    },
+    modules: {
 
     }
 });

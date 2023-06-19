@@ -14,8 +14,13 @@ const router = createRouter({
         { path: '/news/:page?', component: WritingViewer },
     ]
 });
+
 router.beforeEach((to, from, next) => {
-    store.dispatch('updateNavigationItemCurrent',to.path);
+    if (store.state.data == null) {
+        store.dispatch('loadData', to.path);
+    } else {
+        store.dispatch('updateNavigationItemCurrent', to.path);
+    }
     next();
 });
 

@@ -1,21 +1,21 @@
 {
-  "name": "vinhvu_website",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build && copyfiles \"src/assets/**/*\" dist",
-    "copy-assets": "copyfiles -u 2 \"src/assets/**/*\" dist/assets",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "firebase-tools": "^12.4.0",
-    "vue": "^3.2.47",
-    "vue-router": "^4.2.2",
-    "vuex": "^4.0.2"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^4.0.0",
-    "vite": "^4.3.9"
-  }
+    "name": "vinhvu_website",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build && copyfiles \"src/assets/**/*\" dist && copyfiles \"src/data/**/*\" dist && copyfiles \"src/content/**/*\" dist ",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "axios": "^1.4.0",
+        "firebase-tools": "^12.4.0",
+        "vue": "^3.2.47",
+        "vue-router": "^4.2.2",
+        "vuex": "^4.0.2"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^4.0.0",
+        "vite": "^4.3.9"
+    }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="header-handy-info">
-        <span>Hotline: 123</span><span>|</span>
-        <span>Email: ABC@abcd.com</span><span>|</span>
+        <span>Hotline: {{ phone }}</span><span>|</span>
+        <span>Email: {{ mail }}</span><span>|</span>
         <span>Nothing</span>
     </div>
 </template>
@@ -38,3 +38,18 @@
     border-right: 1px solid rgb(194, 194, 194);
 } */
 </style>
+
+<script>
+export default {
+    computed: {
+        info() {
+            return this.$store.state.data.info;
+        },
+        phone() {
+            return this.info.texts.find(t => t.key == "phone").value;
+        }, mail() {
+            return this.info.texts.find(t => t.key == "email").value;
+        }
+    }
+}
+</script>

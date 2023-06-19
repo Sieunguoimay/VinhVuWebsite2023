@@ -1,0 +1,101 @@
+{
+    "info": {
+        "texts": [{
+            "key": "website_full_name",
+            "label": "",
+            "value": "Viesolar Technology"
+        }, {
+            "key": "address",
+            "label": "Dia chi",
+            "value": "Nam Từ Liêm, Hà Nội, Việt Nam."
+        }, {
+            "key": "phone",
+            "label": "Phone number",
+            "value": "0976.164.598"
+        }, {
+            "key": "email",
+            "label": "Email",
+            "value": "viesolar@gmail.com"
+        }],
+        "socials": [{
+            "name": "Facebook",
+            "url": "https://facebook.com",
+            "img": "/socials/icon_facebook.png"
+        }, {
+            "name": "Zalo",
+            "url": "https://web.zalo.com",
+            "img": "/socials/icon_zalo.png"
+        }, {
+            "name": "This Page",
+            "url": "/",
+            "img": "/logo.png"
+        }],
+        "logo": {
+            "img": "/viesolar-logo.png"
+        },
+        "website_url": {
+            "label": "www.viesolar.vn",
+            "url": "https://viesolar.vn"
+        }
+    },
+
+    "navigation": {
+        "nav_groups": [{
+                "display_name": "DỊCH VỤ",
+                "path": "/services"
+            },
+            {
+                "display_name": "GIẢI PHÁP",
+                "path": "/solutions"
+            },
+            {
+                "display_name": "TIN TỨC",
+                "path": "/news"
+            }
+        ]
+    },
+    "pages": [{
+        "path": "/",
+        "name": "TRANG CHỦ",
+        "content": "Nothing"
+    }, {
+        "path": "/services/service_a",
+        "name": "Dịch vụ EPC",
+        "content": "Nothing A",
+        "content_path": "/src/content/example_content.html"
+    }, {
+        "path": "/services/service_b",
+        "name": "Dịch vụ BOT",
+        "content": "Nothing B",
+        "content_path": "/src/content/example_content.html"
+    }, {
+        "path": "/services/service_c",
+        "name": "Dịch vụ O&M",
+        "content": "Nothing C",
+        "content_path": "/src/content/example_content.html"
+    }, {
+        "path": "/solutions/solution_a",
+        "name": "Hệ thống ĐMT HỘ GIA ĐÌNH",
+        "content": "Solutionn A",
+        "content_path": "/src/content/example_content_2.html"
+    }, {
+        "path": "/solutions/solution_b",
+        "name": "Hệ thống ĐMT DOANH NGHIỆP",
+        "content": "Solutionn B",
+        "content_path": "/src/content/example_content_2.html"
+    }, {
+        "path": "/news/tin_tuc_chung",
+        "name": "Tin tức chung",
+        "content": "Tin tuc A",
+        "content_path": "/src/content/example_3/example_3.html"
+    }, {
+        "path": "/news/kien_thuc_chung_ve_dmt",
+        "name": "kiến thức chung về ĐMT",
+        "content": "Tin tuc B",
+        "content_path": "/src/content/example_content.html"
+    }, {
+        "path": "/contact",
+        "name": "LIÊN HỆ",
+        "content": "Contact"
+    }]
+}

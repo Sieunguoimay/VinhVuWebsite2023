@@ -8,7 +8,7 @@
 
             </div>
             <div class="nav-button" @click="toggleFullScreenNavigationPanel()">
-
+                <img src="/src/assets/menu.png" alt="">
             </div>
             <div class="header-right">
                 <div class="header-top-right">
@@ -21,26 +21,13 @@
 
     <div class="navigation-panel" :style="{ top: navPanelPosition.y + 'px', left: navPanelPosition.x + 'px' }"
         v-if="isNavPanelShowing" @mouseover="cancelHideNavPanel" @mouseleave="hideNavPanel">
-        <div class="nav-item" v-for="sub_nav_item in getSelectedSubNavItems(selectedNavItemIndex)" :key="sub_nav_item.path"
-            :class="{ 'sub-nav-item-is-current': sub_nav_item.is_current, 'nav-panel-item': !sub_nav_item.is_current }">
+        <div class="nav-item nav-panel-item" v-for="sub_nav_item in getSelectedSubNavItems(selectedNavItemIndex)"
+            :key="sub_nav_item.path"
+            :class="{ 'sub-nav-item-is-current': sub_nav_item.is_current, 'nav-panel-item-is-not-current': !sub_nav_item.is_current }">
             <router-link :to="sub_nav_item.path">{{ sub_nav_item.display_name }}</router-link>
         </div>
     </div>
-
-    <div class="navigation-panel-fullscreen" v-if="isFullScreenNavPanelShowing">
-        <div class="nav-item" v-for="nav_item in navigation.nav_items" :key="nav_item.path"
-            @click="onFullscreenNavItemClicked(nav_item)">
-
-            <router-link :to="nav_item.path">{{ nav_item.display_name }}</router-link>
-
-            <div class="nav-panel-item nav-item" v-if="selectedNavItemIndex == navigation.nav_items.indexOf(nav_item)"
-                v-for="sub_nav_item in (nav_item.sub_nav_items)" :key="sub_nav_item.path">
-                <router-link :to="sub_nav_item.path" @click="toggleFullScreenNavigationPanel()">{{
-                    sub_nav_item.display_name }}</router-link>
-            </div>
-        </div>
-    </div>
-
+    <NavigationFullscreenPanel />
     <div class="header sticky-header" v-if="showScrollIndicator">
         <div class="sticky-header-content clamped-content-width-center">
             <NavigationBar />
@@ -71,6 +58,7 @@ img {
     flex-wrap: wrap-reverse;
     height: 70px;
     border-bottom: 1px solid rgb(235, 235, 235);
+    gap: 30px;
 }
 
 .header-right {
@@ -92,11 +80,13 @@ img {
 .sticky-header {
     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
 }
-.sticky-header-content{
+
+.sticky-header-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
 .sticky-header NavigationBar {}
 
 .sticky-header HeaderHandyInfo {}
@@ -105,7 +95,8 @@ img {
 
     .logo {
         max-height: 100%;
-        width: 20%;
+        width: 240px;
+        /* width: 20%; */
         display: flex;
         justify-content: center;
     }
@@ -160,10 +151,6 @@ img {
         padding-left: 10px;
     }
 
-    .navigation-panel-fullscreen .nav-panel-item {
-        background-color: aqua;
-        padding-left: 10px;
-    }
 }
 
 .logo img {
@@ -182,13 +169,18 @@ img {
     bottom: 10px;
 }
 
+.nav-button img {
+    height: 100%;
+    width: auto;
+}
+
 .nav-button:hover {
-    background-color: rgb(255, 175, 106);
+    background-color: #F0FF42;
     transition: background-color 0.3s ease;
 }
 
 .nav-button:not(:hover) {
-    background-color: rgb(153, 153, 153);
+    background-color: #82CD47;
     transition: background-color 0.3s ease;
 }
 
@@ -212,27 +204,61 @@ img {
     background-color: white;
     /* background-color: rgb(255, 230, 230); */
     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
+    animation-duration: 0.3s;
+    animation-name: scaleDown;
+}
+
+@keyframes scaleDown {
+    from {
+        transform: scaleY(0.8);
+        transform-origin: top;
+    }
+
+    to {
+        transform: scaleY(1);
+        transform-origin: top;
+    }
 }
 
 .nav-panel-item {
     padding-left: 10px;
     padding-right: 10px;
+
+}
+
+.nav-panel-item-is-not-current {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .nav-panel-item a,
+.nav-panel-item-is-not-current a,
 .sub-nav-item-is-current a {
     font-size: 16px;
     text-decoration: none;
-    color: inherit;
+    display: block;
+}
+
+.nav-panel-item-is-not-current a {
+    color: gray;
+
+}
+
+.sub-nav-item-is-current a {
+    color: #379237;
+}
+
+.sub-nav-item-is-current a:hover,
+.nav-panel-item-is-not-current a:hover {
+    color: #F0FF42;
 }
 
 .nav-panel-item:hover {
-    background-color: rgb(255, 206, 142);
+    background-color: #82CD47;
     color: white;
 }
 
 .sub-nav-item-is-current {
-    color: #dd3333;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -242,11 +268,13 @@ import { objectToString } from '@vue/shared';
 import { reactive, ref } from 'vue';
 import NavigationBar from './tiny/header/NavigationBar.vue'
 import HeaderHandyInfo from './tiny/header/HeaderHandyInfo.vue'
+import NavigationFullscreenPanel from './tiny/header/NavigationFullscreenPanel.vue';
 
 export default {
     components: {
         NavigationBar,
-        HeaderHandyInfo
+        HeaderHandyInfo,
+        NavigationFullscreenPanel
     },
     computed: {
         navigation() {
@@ -263,20 +291,32 @@ export default {
         }
     },
     setup() {
-        const isFullScreenNavPanelShowing = ref(false);
         const selectedNavItemIndex = ref(0);
         const isNavPanelShowing = ref(false);
         const navPanelPosition = reactive({ x: 0, y: 0 });
+        const currentNavItem = ref("");
         let hideTimeout;
 
-        const showNavPanel = (event) => {
+        const showNavPanel = (event, path) => {
             cancelHideNavPanel();
             const itemRect = event.target.getBoundingClientRect();
             navPanelPosition.x = itemRect.left;
             navPanelPosition.y = itemRect.bottom;
-            isNavPanelShowing.value = true;
+
+            if (currentNavItem.value != path) {
+                if (isNavPanelShowing.value) {
+                    isNavPanelShowing.value = false;
+                    setTimeout(() => {
+                        isNavPanelShowing.value = true;
+                    }, 100);
+                } else {
+                    isNavPanelShowing.value = true;
+                }
+            }
+            currentNavItem.value = path;
         };
         const hideNavPanel = (event) => {
+            currentNavItem.value = "";
             cancelHideNavPanel();
             hideTimeout = setTimeout(() => {
                 isNavPanelShowing.value = false;
@@ -288,7 +328,7 @@ export default {
 
         const onNavItemHovered = (event, nav_item_index, nav_item) => {
             if (nav_item.has_sub_nav_items) {
-                showNavPanel(event);
+                showNavPanel(event, nav_item.path);
                 setSelectedNavItem(nav_item_index);
             }
         }
@@ -299,7 +339,6 @@ export default {
         return {
             selectedNavItemIndex,
             isNavPanelShowing,
-            isFullScreenNavPanelShowing,
             navPanelPosition,
             showNavPanel,
             hideNavPanel,
@@ -345,7 +384,7 @@ export default {
             return selectedNavItem.sub_nav_items;
         },
         toggleFullScreenNavigationPanel() {
-            this.isFullScreenNavPanelShowing = !this.isFullScreenNavPanelShowing;
+            this.$eventBus.$emit("toggleFullScreenNavigationPanel", {});
             this.selectedNavItemIndex = -1;
         },
         onFullscreenNavItemClicked(nav_item) {

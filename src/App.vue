@@ -5,10 +5,10 @@ import PagePathBar from "./components/tiny/PagePathBar.vue"
 </script>
 
 <template>
-  <main>
+  <main v-if="$store.state.data!=null">
     <Header />
-    <PagePathBar class="clamped-content-width-center"/>
-    <router-view class="clamped-content-width-center"/>
+    <PagePathBar class="clamped-content-width-center" />
+    <router-view class="clamped-content-width-center" />
     <Footer />
     <!-- <PriceConsultantBar /> -->
   </main>
@@ -20,8 +20,15 @@ main {
   margin: 0 auto; */
   /* background-color: aliceblue; */
 }
+
 @font-face {
   font-family: "Roboto Condensed";
   src: url("./fonts/RobotoCondensed-Regular.ttf") format("truetype");
 }
 </style>
+<script>
+export default {
+  mounted() {
+  }
+}
+</script>

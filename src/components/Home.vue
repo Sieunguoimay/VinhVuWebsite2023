@@ -4,14 +4,22 @@
             <transition name="slide" mode="out-in">
                 <img :key="currentSlide" class="slide" :src="slides[currentSlide]" alt="Slide">
             </transition>
+
         </div>
-        <h1>Main content goes here.. {{ $route.params.index }}</h1>
+        <div class="main-slogan">
+            <h1>Main content goes here.. {{ $route.params.index }}</h1>
+        </div>
+        <div class="three-cards-title">
+            <h2>Solutions</h2>
+        </div>
+        <Home3CardsSection />
     </div>
 </template>
 <style scoped>
 .main-body {
-    height: 1000px;
+    /* height: 1000px; */
     /* padding-top: 2px; */
+    margin-bottom: 40px;
 }
 
 .slider {
@@ -22,7 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color:rgb(201, 201, 201);
+    color: rgb(201, 201, 201);
 }
 
 .slide {
@@ -72,9 +80,24 @@
         opacity: 0;
     }
 }
+.main-slogan{
+    margin-top:30px;
+    margin-bottom:30px;
+    display:flex;
+    justify-content: center;
+}
+.three-cards-title{
+    margin-bottom:10px;
+    display:flex;
+    justify-content: center;
+}
 </style>
 <script>
+import Home3CardsSection from './tiny/Home3CardsSection.vue';
 export default {
+    components: {
+        Home3CardsSection
+    },
     data() {
         return {
             slides: [

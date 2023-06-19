@@ -17,11 +17,12 @@
     background-color: #82CD47;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: auto;
+    padding-right: auto;
 }
 
 .label {
@@ -63,7 +64,7 @@ export default {
             contact_items: [
                 {
                     url: "#",
-                    img: "./src/assets/socials/icon_zalo.png"
+                    img: "./src/assets/socials/messenger.png"
                 }, {
                     url: "#",
                     img: "./src/assets/headset.png"
