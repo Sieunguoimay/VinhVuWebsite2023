@@ -57,42 +57,45 @@
     "pages": [{
         "path": "/",
         "name": "TRANG CHỦ",
-        "content": "Nothing"
+        "content": {
+            "three_cards_title": "Chúng tôi cung cấp các dịch vụ",
+            "center_description": "Viesolar Technology"
+        }
     }, {
         "path": "/services/service_a",
         "name": "Dịch vụ EPC",
         "content": "Nothing A",
-        "content_path": "/src/content/example_content.html"
+        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
     }, {
         "path": "/services/service_b",
         "name": "Dịch vụ BOT",
         "content": "Nothing B",
-        "content_path": "/src/content/example_content.html"
+        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
     }, {
         "path": "/services/service_c",
         "name": "Dịch vụ O&M",
         "content": "Nothing C",
-        "content_path": "/src/content/example_content.html"
+        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
     }, {
         "path": "/solutions/solution_a",
         "name": "Hệ thống ĐMT HỘ GIA ĐÌNH",
         "content": "Solutionn A",
-        "content_path": "/src/content/example_content_2.html"
+        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
     }, {
         "path": "/solutions/solution_b",
         "name": "Hệ thống ĐMT DOANH NGHIỆP",
         "content": "Solutionn B",
-        "content_path": "/src/content/example_content_2.html"
+        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
     }, {
         "path": "/news/tin_tuc_chung",
         "name": "Tin tức chung",
         "content": "Tin tuc A",
-        "content_path": "/src/content/example_3/example_3.html"
+        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
     }, {
         "path": "/news/kien_thuc_chung_ve_dmt",
         "name": "kiến thức chung về ĐMT",
         "content": "Tin tuc B",
-        "content_path": "/src/content/example_content.html"
+        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
     }, {
         "path": "/contact",
         "name": "LIÊN HỆ",

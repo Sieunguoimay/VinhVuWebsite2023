@@ -1,13 +1,14 @@
 <template>
     <div class="card-container">
-        <div v-for="(card, index) in cards" :key="index" class="card" @click="navigateTo(card.link)">
-            <img :src="card.imageSrc" alt="Card Image" class="card-image" />
+        <div v-for="(card, index) in cards" :key="index" class="card" @click="navigateTo(card.page_path)">
+            <img :src="card.img" alt="Card Image" class="card-image" />
             <div class="card-title">{{ card.title.toUpperCase() }}</div>
         </div>
     </div>
 </template>
   
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
@@ -27,8 +28,22 @@ export default {
                     title: "Solution 3",
                     link: "/page3"
                 }
-            ]
+            ],
+            loadedContent: null,
         };
+    },
+    mounted() {
+        axios.get('/src/data/home-cards.json').then(response => {
+            this.cards = response.data.slice(0, 3);
+        }).catch(error => {
+
+        });
+        // this.$store.dispatch('getPageContent', {
+        //     path: to.path,
+        //     resultCallback: result => {
+        //         this.loadedContent = result;
+        //     }
+        // });
     },
     methods: {
         navigateTo(link) {
@@ -46,15 +61,15 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap:20px;
+    gap: 20px;
 }
 
 .card {
     flex: 1;
-    /* max-width: 300px; */
-    /* height: 400px; */
     min-width: 200px;
-    /* background-color: #f1f1f1; */
+    display: flex;
+    flex-direction: column;
+
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -70,6 +85,13 @@ export default {
     padding: 10px;
     text-align: center;
     font-size: large;
+    height:100px;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    white-space: pre-wrap;
 }
 
 .card:hover {

@@ -7,10 +7,10 @@
 
         </div>
         <div class="main-slogan">
-            <h1>Main content goes here.. {{ $route.params.index }}</h1>
+            <h1>{{ home_content.center_description }}</h1>
         </div>
         <div class="three-cards-title">
-            <h2>Solutions</h2>
+            <h2>{{ home_content.three_cards_title }}</h2>
         </div>
         <Home3CardsSection />
     </div>
@@ -95,6 +95,11 @@
 <script>
 import Home3CardsSection from './tiny/Home3CardsSection.vue';
 export default {
+    computed:{
+        home_content(){
+            return this.$store.state.data.pages.find(p=>p.path=='/').content;
+        }
+    },
     components: {
         Home3CardsSection
     },

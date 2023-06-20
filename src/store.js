@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import $dataProvider from "./data"
+import $dataUtils from "./data_utils"
 import axios from 'axios';
 
 const store = createStore({
@@ -31,15 +31,35 @@ const store = createStore({
                 this.commit('updateNavigationItemCurrent', currentPath)
             }
         },
-        loadData(state,done) {
-            axios.get('/src/data/website-config.json')
+        loadData(state, done) {
+            axios.get($dataUtils.getGoogleDocExportURL('https://docs.google.com/document/d/1H68sdFH5AP76Cbd-yRzpKKJGuD8-OH3piu1U00N31qM/edit?usp=sharing')) //'/src/data/website-config.json')
                 .then(response => {
-                    this.commit('setData', $dataProvider.setupStatefulData(response.data));
+                    // Log the rendered string
+                    var jsonString = $dataUtils.getHtmlRenderedText(response.data);
+                    var data = JSON.parse(jsonString);
+                    console.log(data);
+                    console.log(response.data);
+                    this.commit('setData', $dataUtils.setupStatefulData(data));
                     done();
                 })
                 .catch(error => {
                     console.error(error);
                 });
+        },
+        getPageContent(state, params) {
+            console.log(this.state.data);
+            var found = this.state.data.pages.find(p => p.path == params.path);
+            if (found == null) return "";
+            if (found.content_loaded == undefined || found.content_loaded == false) {
+                $dataUtils.fetchHtml(found.content_path, result => {
+                    found.content = result;
+                    found.content_loaded = true;
+                    console.log(result);
+                    params.resultCallback(found.content);
+                });
+            } else {
+                params.resultCallback(found.content);
+            }
         }
     },
     getters: {
