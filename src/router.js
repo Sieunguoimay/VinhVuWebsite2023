@@ -16,11 +16,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (store.state.data == null) {
-        store.dispatch('loadData', to.path);
-    } else {
-        store.dispatch('updateNavigationItemCurrent', to.path);
-    }
+    store.dispatch('updateNavigationItemCurrent', to.path);
     next();
 });
 

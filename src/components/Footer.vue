@@ -4,12 +4,15 @@
         <div class="upper">
             <div class="footer-content left info">
                 <p>{{ info.texts.find(t => t.key == "website_full_name").value.toUpperCase() }}</p>
-                <p>{{ info.texts.find(t => t.key == "address").value }}</p>
-                <p>{{ info.texts.find(t => t.key == "phone").value }}</p>
-                <p>{{ info.texts.find(t => t.key == "email").value }}</p>
+                <div class="info-detail">
+                    <p>{{ info.texts.find(t => t.key == "address").value }}</p>
+                    <p>{{ info.texts.find(t => t.key == "phone").value }}</p>
+                    <p>{{ info.texts.find(t => t.key == "email").value }}</p>
+                </div>
             </div>
             <div class="middle footer-content navigation">
-                <div class="nav-items-group" v-for="nav_item in navigation.nav_items.filter(i => i.has_sub_nav_items).sort((a,b)=>b.display_name.localeCompare(a.display_name))">
+                <div class="nav-items-group"
+                    v-for="nav_item in navigation.nav_items.filter(i => i.has_sub_nav_items).sort((a, b) => b.display_name.localeCompare(a.display_name))">
                     <div class="group-name">
                         <p>{{ nav_item.display_name.toUpperCase() }}</p>
                     </div>
@@ -63,6 +66,8 @@ img {
     /* justify-content: space-evenly; */
     height: 80%;
     margin-top: 20px;
+    margin-left:5px;
+    margin-right:5px;
 
 }
 
@@ -79,6 +84,7 @@ img {
 .footer-lower a {
     color: #313b31;
 }
+
 .footer-content {
 
     color: gray;
@@ -90,6 +96,7 @@ img {
     flex: 1;
     min-width: 200px;
 }
+
 .middle {
     flex: 2;
     min-width: 400px;
@@ -99,7 +106,7 @@ img {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap:10px;
+    gap: 10px;
 }
 
 .nav-items-group {
@@ -107,15 +114,21 @@ img {
 }
 
 .group-name p {
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .info {
+    /* font-style: italic; */
+}
+.info-detail {
     font-style: italic;
+
+    font-size: small;
 }
 
 .sub-nav-item {
     font-style: italic;
+    font-size: small;
 }
 
 /* .sub-nav-item { */
@@ -135,7 +148,7 @@ img {
 }
 
 .social-title p {
-    font-style: italic;
+    /* font-style: italic; */
 }
 
 .social {
@@ -151,7 +164,7 @@ img {
 }
 
 .social img {
-    height: 40px;
+    height: 35px;
     width: auto;
     display: block;
 }

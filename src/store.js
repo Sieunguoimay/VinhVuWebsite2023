@@ -31,24 +31,15 @@ const store = createStore({
                 this.commit('updateNavigationItemCurrent', currentPath)
             }
         },
-        loadData(state, currentPath) {
-            // this.commit('setData', $dataProvider.setupStatefulData(jsonData));
-            // this.dispatch("updateNavigationItemCurrent", currentPath);
-
-            import ('/src/data/website-config.json')
-            .then(({ default: json }) => {
-                this.commit('setData', $dataProvider.setupStatefulData(json));
-                this.dispatch("updateNavigationItemCurrent", currentPath);
-            });
-            // axios.get('/src/data/website-config.json')
-            //     .then(response => {
-            //         console.log(response);
-            //         this.commit('setData', $dataProvider.setupStatefulData(response.data));
-            //         this.dispatch("updateNavigationItemCurrent", currentPath);
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-            //     });
+        loadData(state,done) {
+            axios.get('/src/data/website-config.json')
+                .then(response => {
+                    this.commit('setData', $dataProvider.setupStatefulData(response.data));
+                    done();
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
     },
     getters: {

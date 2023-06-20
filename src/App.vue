@@ -5,7 +5,7 @@ import PagePathBar from "./components/tiny/PagePathBar.vue"
 </script>
 
 <template>
-  <main v-if="$store.state.data!=null">
+  <main v-if="$store.state.data != null">
     <Header />
     <PagePathBar class="clamped-content-width-center" />
     <router-view class="clamped-content-width-center" />
@@ -29,6 +29,9 @@ main {
 <script>
 export default {
   mounted() {
-  }
+    this.$store.dispatch('loadData',()=>{
+      this.$store.dispatch('updateNavigationItemCurrent', this.$route.path);
+    });
+  },
 }
 </script>

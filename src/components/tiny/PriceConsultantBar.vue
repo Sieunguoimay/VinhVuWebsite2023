@@ -2,7 +2,7 @@
     <div>
         <div class="container">
             <div class="label">
-                <p>{{ label }}</p>
+                <p>{{ label }}:</p>
             </div>
             <div class="contact-media">
                 <a href="#" class="contact-media-item" v-for="item in contact_items" :key="item.url">
@@ -19,14 +19,12 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
     padding-left: auto;
     padding-right: auto;
 }
 
 .label {
-    font-size: large;
+    font-size: medium;
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -60,7 +58,7 @@
 export default {
     data() {
         return {
-            label: "Nhan tu van bao gia truc tiep:",
+            label: "Nhận tư vấn báo giá trực tiếp",
             contact_items: [
                 {
                     url: "#",
