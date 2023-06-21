@@ -7,7 +7,6 @@ module.exports = {
                 options.fallback.options.name = 'assets/[name].[hash:8].[ext]';
                 return options;
             });
-
     },
     configureWebpack: {
         output: {

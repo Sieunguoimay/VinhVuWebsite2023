@@ -2,43 +2,56 @@ import axios from 'axios'
 import prefixer from 'postcss-prefix-selector'
 import postcss from 'postcss'
 import * as cheerio from 'cheerio';
-export default {
-// const axios = require('axios');
-// const prefixer = require('postcss-prefix-selector');
-// const postcss = require('postcss');
-// const cheerio = require('cheerio');
-// module.exports = {
-    setupStatefulData(data) {
+
+var data_utils = {
+    setupStatefulDataForOptimize(data) {
         data.info.logo.alt_string = "Website Name";
         data.navigation.nav_items = this.createNavItems(data);
         return data;
     },
+    setupStatefulData(data, done) {
+        data.info.logo.alt_string = "Website Name";
+        var pages = data.pages;
+        var count = pages.length;
+        for (const p of pages) {
+            this.loadPageContentIfRequire(p, result => {
+                count--;
+                if (count == 0) {
+                    data.navigation.nav_items = this.createNavItems(data);
+                    done(data);
+                }
+            }, !data.settings.optimize_for_speed);
+        }
+        return data;
+    },
     createNavItems(data) {
         var nav_items = [];
-        for (var pageIndex = 0; pageIndex < data.pages.length; pageIndex++) {
-            var page = data.pages[pageIndex];
-            var navGroup = this.findNavGroup(data, page.path);
-            if (navGroup != null) {
-                var foundNavGroupItem = nav_items.find(i => i.path == navGroup.path);
-                if (foundNavGroupItem == null) {
-                    foundNavGroupItem = this.createNavGroupItem(navGroup);
-                    nav_items.push(foundNavGroupItem);
-                }
-                foundNavGroupItem.sub_nav_items.push({
-                    display_name: page.name,
-                    path: page.path,
-                    is_current: false,
-                });
-            } else {
-                nav_items.push({
-                    has_sub_nav_items: false,
-                    path: page.path,
-                    display_name: page.name,
-                    is_current: false,
-                });
-            }
+        for (const page of data.pages) {
+            this.createNavItem(data, page, nav_items);
         }
         return nav_items;
+    },
+    createNavItem(data, page, nav_items) {
+        var navGroup = this.findNavGroup(data, page.path);
+        if (navGroup != null) {
+            var foundNavGroupItem = nav_items.find(i => i.path == navGroup.path);
+            if (foundNavGroupItem == null) {
+                foundNavGroupItem = this.createNavGroupItem(navGroup);
+                nav_items.push(foundNavGroupItem);
+            }
+            foundNavGroupItem.sub_nav_items.push({
+                display_name: page.name,
+                path: page.path,
+                is_current: false,
+            });
+        } else {
+            nav_items.push({
+                has_sub_nav_items: false,
+                path: page.path,
+                display_name: page.name,
+                is_current: false,
+            });
+        }
     },
     findPageByPath(data, path) {
         return data.pages.find(p => p.path == path);
@@ -60,54 +73,44 @@ export default {
     },
     getPageDisplayPath(data, path) {
         var page = this.findPageByPath(data, path);
+        if (page == null) {
+            return null;
+        }
         var navGroup = this.findNavGroup(data, path);
         if (navGroup == null) {
             return [page.name];
         }
         return [navGroup.display_name, page.name]
     },
+    optimizeHtml(html) {
+        const $ = cheerio.load(html);
+        const className = 'some-selector';
+        // var relativePath = this.getRelativePath(path);
+        // $('img').each((index, element) => {
+        //     const src = $(element).attr('src');
+        //     $(element).attr('src', relativePath + '/' + src);
+        // });
+        $('body').addClass(className);
+        $('style').each((_, styleTag) => {
+            const $styleTag = $(styleTag);
+            const styleContent = $styleTag.html();
+            const modifiedStyleContent = this.addLocalSelector(styleContent, className);
+            $styleTag.html(modifiedStyleContent);
+        });
 
-    fetchHtml(url, resultCallback) {
-        var exportUrl = this.getGoogleDocExportURL(url);
-        axios.get(exportUrl)
-            .then(response => {
-                const $ = cheerio.load(response.data);
-                // var relativePath = this.getRelativePath(path);
-                // $('img').each((index, element) => {
-                //     const src = $(element).attr('src');
-                //     $(element).attr('src', relativePath + '/' + src);
-                // });
-                this.getResponseFilename(response);
-                $('body').addClass('some-selector');
-                $('style').each((_, styleTag) => {
-                    const $styleTag = $(styleTag);
-                    const styleContent = $styleTag.html();
-                    const modifiedStyleContent = this.addLocalSelector(styleContent);
-                    $styleTag.html(modifiedStyleContent);
-                });
+        const bodyAttributes = $('body').get(0).attribs;
+        const divTag = $('<div>').attr(bodyAttributes).html($('body').html());
+        $('body').replaceWith(divTag);
 
-                const bodyAttributes = $('body').get(0).attribs;
-                const divTag = $('<div>').attr(bodyAttributes).html($('body').html());
-                $('body').replaceWith(divTag);
-
-                resultCallback($.html());
-            })
-            .catch(error => {
-                console.error('Error fetching raw HTML:', error);
-                resultCallback("");
-            });
+        return $.html();
     },
-    getGoogleDocExportURL(shareUrl) {
-        const regex = /\/[^/]*\?/;
-        return shareUrl.replace(regex, '/export/html?');
-    },
-    addLocalSelector(stylesheet) {
+    addLocalSelector(stylesheet, custom_selector) {
         return postcss().use(prefixer({
-            prefix: '.some-selector',
+            prefix: '.' + custom_selector,
             // exclude: ['.c'],
 
             // Optional transform callback for case-by-case overrides
-            transform: function (prefix, selector, prefixedSelector, filePath, rule) {
+            transform: function(prefix, selector, prefixedSelector, filePath, rule) {
                 if (selector === 'body') {
                     return 'body' + prefix;
                 } else {
@@ -116,11 +119,27 @@ export default {
             }
         })).process(stylesheet).css
     },
+    fetchHtml(exportUrl, resultCallback) {
+        console.log(exportUrl);
+        axios.get(exportUrl)
+            .then(response => {
+                resultCallback(this.optimizeHtml(response.data), response);
+            })
+            .catch(error => {
+                console.error('Error fetching raw HTML:', error);
+                resultCallback("", error);
+            });
+    },
+    getGoogleDocExportURL(shareUrl) {
+        const regex = /\/[^/]*\?/;
+        return shareUrl.replace(regex, '/export/html?');
+    },
     getResponseFilename(response) {
         const disposition = response.headers['content-disposition'];
         var fileName = "Page Untitled";
         const utfPattern = /filename\*=UTF-8''/
         const fileNamePattern = /filename=/;
+
         disposition.split(';').forEach(sm => {
             if (sm.match(utfPattern)) {
                 fileName = decodeURIComponent(sm.split(utfPattern)[1]);
@@ -130,7 +149,8 @@ export default {
                 return;
             }
         })
-        return fileName;
+        const fileNameWithoutExtension = fileName.split('.').slice(0, -1).join('.');
+        return fileNameWithoutExtension;
     },
     removeDoubleQuote(str) {
         return str.replace(/^"(.*)"$/, '$1');
@@ -138,5 +158,71 @@ export default {
     getHtmlRenderedText(htmlContent) {
         const $ = cheerio.load(htmlContent);
         return $('body').text().match(/("(\\.|[^"])*"|\[|\]|,|\d+|\{|\}|\:|[a-zA-Z0-9_]+)/g).join('');
+    },
+    simplifyString(str) {
+
+        return str
+            .normalize("NFD") // Normalize to decomposed form
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/đ/gi, "d")
+            .toLowerCase() // Convert to lowercase
+            .replace(/\s+/g, "-");
+    },
+    getFirstImage(html) {
+        const $ = cheerio.load(html);
+        const found = $('body').find('img').first(i => i.attr('src') != undefined);
+        return found != null ? found.attr('src') : null;
+    },
+    loadPageContentIfRequire(page, callback, isFromGoogleDoc) {
+        if (page.content_loaded == undefined || page.content_loaded == false) {
+            if (page.content_path != undefined) {
+
+                var exportUrl = isFromGoogleDoc ? this.getGoogleDocExportURL(page.content_path) : page.content_path;
+
+                this.fetchHtml(exportUrl, (result, response) => {
+                    page.content = result;
+                    page.content_loaded = true;
+
+                    if (isFromGoogleDoc) {
+                        this.enrichPageData(page, response);
+                    }
+
+                    callback(page);
+                });
+                return;
+            }
+        }
+        callback(page);
+    },
+    enrichPageData(page, response) {
+        page.name = this.getResponseFilename(response);
+        page.simplified_name = this.simplifyString(page.name);
+        page.path = this.getRelativePath(page.path) + "/" + page.simplified_name;
+    },
+    getRelativePath(path) {
+        const segments = path.split(/\/+/); // Split the path by slashes
+        segments.pop(); // Remove the last segment
+        return segments.join("/");
+    },
+    getPreviewContent(html) {
+        const $ = cheerio.load(html);
+        return this.getFirst20Words($('body').text(), 30) + "..";
+    },
+    getFirst20Words(str, count) {
+        const words = str.split(' ');
+        const first20Words = words.slice(0, count);
+        const result = first20Words.join(' ');
+        return result;
+    },
+    createCardData(page, html) {
+        const firstImageSrc = this.getFirstImage(html);
+        return {
+            page_path: page.path,
+            title: page.name,
+            img: firstImageSrc == null ? '/src/assets/cover/cover_image_1.jpg' : firstImageSrc,
+            preview_content: this.getPreviewContent(html)
+        };
     }
+
 }
+export default data_utils;

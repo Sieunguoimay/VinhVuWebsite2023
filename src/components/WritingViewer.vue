@@ -3,9 +3,6 @@
 </template>
 <style scoped>
 .main-body {
-    /* height: 1000px; */
-    /* display: flex;
-    flex-direction: column; */
     margin-bottom: 20px;
 }
 </style>
@@ -17,19 +14,14 @@ export default {
             loadedContent: null,
             pagePath: null
         }
-    },
-    beforeRouteEnter(to, from, next) {
+    }, beforeRouteEnter(to, from, next) {
         next(vm => {
-            // vm.pagePath = vm.getCurrentPage(to.path).content_path;
-            // var page = vm.getCurrentPage(to.path);
-            // if (page == null || page.content_path == undefined) return;
-            vm.$store.dispatch('getPageContent', {
-                path: to.path,
-                resultCallback: result => {
-                    vm.loadedContent = result;
-                }
-            });
+            vm.fetchContent(vm, to);
         });
+    },
+    beforeRouteUpdate(to, from, next) {
+        this.fetchContent(this, to);
+        next();
     },
     computed: {
         pages() {
@@ -43,7 +35,15 @@ export default {
         getRelativePath(filePath) {
             return filePath.substring(0, filePath.lastIndexOf('/'));
         },
-
+        fetchContent(target, to) {
+            target.$store.dispatch('getPageContent', {
+                path: to.path,
+                resultCallback: (page) => {
+                    console.log(page);
+                    target.loadedContent = page.content;
+                }
+            });
+        }
 
     }
 }

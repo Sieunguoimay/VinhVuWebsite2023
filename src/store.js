@@ -32,41 +32,47 @@ const store = createStore({
             }
         },
         loadData(state, done) {
-            //($dataUtils.getGoogleDocExportURL('https://docs.google.com/document/d/1H68sdFH5AP76Cbd-yRzpKKJGuD8-OH3piu1U00N31qM/edit?usp=sharing')) //
             axios.get('/src/data/website-config.json')
                 .then(response => {
                     // var jsonString = $dataUtils.getHtmlRenderedText(response.data);
                     // var data = JSON.parse(jsonString);
-                    const data = response.data;
-                    this.commit('setData', $dataUtils.setupStatefulData(data));
-                    done();
+                    const website_config = response.data;
+                    if (website_config.settings.optimize_for_speed) {
+                        this.commit('setData', $dataUtils.setupStatefulDataForOptimize(website_config));
+                        done();
+                    } else {
+                        axios.get($dataUtils.getGoogleDocExportURL(website_config.settings.website_config_url)).then(res => {
+                            var jsonString = $dataUtils.getHtmlRenderedText(res.data);
+                            var d = JSON.parse(jsonString);
+                            $dataUtils.setupStatefulData(d, (dd) => {
+                                this.commit('setData', dd);
+                                done();
+                            });
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }
                 })
                 .catch(error => {
                     console.error(error);
                 });
         },
+
         getPageContent(state, params) {
-            console.log(this.state.data);
-            var found = this.state.data.pages.find(p => p.path == params.path);
-            if (found == null) return "";
-            if (found.content_loaded == undefined || found.content_loaded == false) {
-                $dataUtils.fetchHtml(found.content_path, result => {
-                    found.content = result;
-                    found.content_loaded = true;
-                    console.log(result);
-                    params.resultCallback(found.content);
-                });
-            } else {
-                params.resultCallback(found.content);
-            }
+            var data = this.state.data;
+            var page = data.pages.find(p => p.path == params.path);
+            if (page == null) return "";
+            $dataUtils.loadPageContentIfRequire(page, params.resultCallback, !data.settings.optimize_for_speed);
         }
     },
+
     getters: {
 
     },
     modules: {
 
-    }
+    },
+
 });
 
 export default store;

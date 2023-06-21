@@ -1,4 +1,8 @@
 {
+  "settings": {
+    "optimize_for_speed": false,
+    "website_config_url": "https://docs.google.com/document/d/1H68sdFH5AP76Cbd-yRzpKKJGuD8-OH3piu1U00N31qM/edit?usp=sharing"
+  },
   "info": {
     "texts": [
       {
@@ -13,7 +17,7 @@
       },
       {
         "key": "phone",
-        "label": "Phone number",
+        "label": "Số điện thoại",
         "value": "0976.164.598"
       },
       {
@@ -74,50 +78,49 @@
     },
     {
       "path": "/services/dich-vu-epc",
+      "content_path": "https://docs.google.com/document/d/1IIelwIlDHJYY7UMLlK12fyfOXzJe-gUWYzBVyZEt8VQ/edit?usp=drive_link",
       "name": "Dịch vụ EPC",
-      "content": "Nothing A",
-      "content_path": "https://docs.google.com/document/d/1IIelwIlDHJYY7UMLlK12fyfOXzJe-gUWYzBVyZEt8VQ/edit?usp=drive_link"
+      "simplified_name": "dich-vu-epc"
     },
     {
       "path": "/services/dich-vu-bot",
+      "content_path": "https://docs.google.com/document/d/1uZ5ZsrJlBax42vwsok5U8PMP19wELMZpwFFDEvr4OO8/edit?usp=drive_link",
       "name": "Dịch vụ BOT",
-      "content": "Nothing B",
-      "content_path": "https://docs.google.com/document/d/1uZ5ZsrJlBax42vwsok5U8PMP19wELMZpwFFDEvr4OO8/edit?usp=drive_link"
+      "simplified_name": "dich-vu-bot"
     },
     {
       "path": "/services/dich-vu-o&m",
+      "content_path": "https://docs.google.com/document/d/1Ke0ndyxFx_l0WSAM0Uzyr_YPekVlS77rSHIAgTM0yV8/edit?usp=drive_link",
       "name": "Dịch vụ O&M",
-      "content": "Nothing C",
-      "content_path": "https://docs.google.com/document/d/1Ke0ndyxFx_l0WSAM0Uzyr_YPekVlS77rSHIAgTM0yV8/edit?usp=drive_link"
+      "simplified_name": "dich-vu-o&m"
     },
     {
       "path": "/solutions/he-thong-dmt-ho-gia-dinh",
+      "content_path": "https://docs.google.com/document/d/1H-K57kMRJWEOaTBrawSqdY4ZbP5ZCN0jcn4h0SmRMMc/edit?usp=drive_link",
       "name": "Hệ thống ĐMT HỘ GIA ĐÌNH",
-      "content": "Solutionn A",
-      "content_path": "https://docs.google.com/document/d/1H-K57kMRJWEOaTBrawSqdY4ZbP5ZCN0jcn4h0SmRMMc/edit?usp=drive_link"
+      "simplified_name": "he-thong-dmt-ho-gia-dinh"
     },
     {
       "path": "/solutions/he-thong-dmt-doanh-nghiep",
+      "content_path": "https://docs.google.com/document/d/1Ju6RUPar7SkIQpWuELfqz3KUMGraoWueksatNr9scoI/edit?usp=drive_link",
       "name": "Hệ thống ĐMT DOANH NGHIỆP",
-      "content": "Solutionn B",
-      "content_path": "https://docs.google.com/document/d/1Ju6RUPar7SkIQpWuELfqz3KUMGraoWueksatNr9scoI/edit?usp=drive_link"
+      "simplified_name": "he-thong-dmt-doanh-nghiep"
     },
     {
-      "path": "/news/tin-tuc-chung-tam",
-      "name": "Tin tức chung tam",
-      "content": "Tin tuc A",
-      "content_path": "https://docs.google.com/document/d/17foGr24QoxgjXQLei4tptYOht2c1Xps_GbKcysSigWQ/edit?usp=drive_link"
+      "path": "/news/tin-tuc-chung",
+      "content_path": "https://docs.google.com/document/d/17foGr24QoxgjXQLei4tptYOht2c1Xps_GbKcysSigWQ/edit?usp=drive_link",
+      "name": "Tin tức chung",
+      "simplified_name": "tin-tuc-chung"
     },
     {
       "path": "/news/kien-thuc-chung-ve-dmt",
+      "content_path": "https://docs.google.com/document/d/1Q8I0JgTyp0vdPgldrl_xlqL9KT6m5lkFNHYBhZ4EDgg/edit?usp=drive_link",
       "name": "Kiến thức chung về ĐMT",
-      "content": "Tin tuc B",
-      "content_path": "https://docs.google.com/document/d/1Q8I0JgTyp0vdPgldrl_xlqL9KT6m5lkFNHYBhZ4EDgg/edit?usp=drive_link"
+      "simplified_name": "kien-thuc-chung-ve-dmt"
     },
     {
       "path": "/contact",
-      "name": "LIÊN HỆ",
-      "content": "Contact"
+      "name": "LIÊN HỆ"
     }
   ]
 }
