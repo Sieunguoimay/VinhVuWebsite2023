@@ -12,6 +12,8 @@ import PagePathBar from "./components/tiny/PagePathBar.vue"
     <Footer />
     <!-- <PriceConsultantBar /> -->
   </main>
+
+  
 </template>
 
 <style scoped>
