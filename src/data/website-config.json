@@ -1,104 +1,123 @@
 {
-    "info": {
-        "texts": [{
-            "key": "website_full_name",
-            "label": "",
-            "value": "Viesolar Technology"
-        }, {
-            "key": "address",
-            "label": "Dia chi",
-            "value": "Nam Từ Liêm, Hà Nội, Việt Nam."
-        }, {
-            "key": "phone",
-            "label": "Phone number",
-            "value": "0976.164.598"
-        }, {
-            "key": "email",
-            "label": "Email",
-            "value": "viesolar@gmail.com"
-        }],
-        "socials": [{
-            "name": "Facebook",
-            "url": "https://facebook.com",
-            "img": "/socials/icon_facebook.png"
-        }, {
-            "name": "Zalo",
-            "url": "https://web.zalo.com",
-            "img": "/socials/icon_zalo.png"
-        }, {
-            "name": "This Page",
-            "url": "/",
-            "img": "/logo.png"
-        }],
-        "logo": {
-            "img": "/viesolar-logo.png"
-        },
-        "website_url": {
-            "label": "www.viesolar.vn",
-            "url": "https://viesolar.vn"
-        }
+  "info": {
+    "texts": [
+      {
+        "key": "website_full_name",
+        "label": "",
+        "value": "Viesolar Technology"
+      },
+      {
+        "key": "address",
+        "label": "Địa chỉ",
+        "value": "Nam Từ Liêm, Hà Nội, Việt Nam."
+      },
+      {
+        "key": "phone",
+        "label": "Phone number",
+        "value": "0976.164.598"
+      },
+      {
+        "key": "email",
+        "label": "Email",
+        "value": "viesolar@gmail.com"
+      }
+    ],
+    "socials": [
+      {
+        "name": "Facebook",
+        "url": "https://facebook.com",
+        "img": "/socials/icon_facebook.png"
+      },
+      {
+        "name": "Zalo",
+        "url": "https://web.zalo.com",
+        "img": "/socials/icon_zalo.png"
+      },
+      {
+        "name": "This Page",
+        "url": "/",
+        "img": "/logo.png"
+      }
+    ],
+    "logo": {
+      "img": "/viesolar-logo.png"
     },
-
-    "navigation": {
-        "nav_groups": [{
-                "display_name": "DỊCH VỤ",
-                "path": "/services"
-            },
-            {
-                "display_name": "GIẢI PHÁP",
-                "path": "/solutions"
-            },
-            {
-                "display_name": "TIN TỨC",
-                "path": "/news"
-            }
-        ]
+    "website_url": {
+      "label": "www.viesolar.vn",
+      "url": "https://viesolar.vn"
+    }
+  },
+  "navigation": {
+    "nav_groups": [
+      {
+        "display_name": "DỊCH VỤ",
+        "path": "/services"
+      },
+      {
+        "display_name": "GIẢI PHÁP",
+        "path": "/solutions"
+      },
+      {
+        "display_name": "TIN TỨC",
+        "path": "/news"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "path": "/",
+      "name": "TRANG CHỦ",
+      "content": {
+        "three_cards_title": "Chúng tôi cung cấp các dịch vụ",
+        "center_description": "Viesolar Technology"
+      }
     },
-    "pages": [{
-        "path": "/",
-        "name": "TRANG CHỦ",
-        "content": {
-            "three_cards_title": "Chúng tôi cung cấp các dịch vụ",
-            "center_description": "Viesolar Technology"
-        }
-    }, {
-        "path": "/services/service_a",
-        "name": "Dịch vụ EPC",
-        "content": "Nothing A",
-        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
-    }, {
-        "path": "/services/service_b",
-        "name": "Dịch vụ BOT",
-        "content": "Nothing B",
-        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
-    }, {
-        "path": "/services/service_c",
-        "name": "Dịch vụ O&M",
-        "content": "Nothing C",
-        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
-    }, {
-        "path": "/solutions/solution_a",
-        "name": "Hệ thống ĐMT HỘ GIA ĐÌNH",
-        "content": "Solutionn A",
-        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
-    }, {
-        "path": "/solutions/solution_b",
-        "name": "Hệ thống ĐMT DOANH NGHIỆP",
-        "content": "Solutionn B",
-        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
-    }, {
-        "path": "/news/tin_tuc_chung",
-        "name": "Tin tức chung",
-        "content": "Tin tuc A",
-        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
-    }, {
-        "path": "/news/kien_thuc_chung_ve_dmt",
-        "name": "kiến thức chung về ĐMT",
-        "content": "Tin tuc B",
-        "content_path": "https://docs.google.com/document/d/1bhSejeUUNQvxJy_5xh0PTGdgZNYmgvGf5FjiyNECAkY/edit?usp=sharing"
-    }, {
-        "path": "/contact",
-        "name": "LIÊN HỆ",
-        "content": "Contact"
-    }]
+    {
+      "path": "/services/dich-vu-epc",
+      "name": "Dịch vụ EPC",
+      "content": "Nothing A",
+      "content_path": "https://docs.google.com/document/d/1IIelwIlDHJYY7UMLlK12fyfOXzJe-gUWYzBVyZEt8VQ/edit?usp=drive_link"
+    },
+    {
+      "path": "/services/dich-vu-bot",
+      "name": "Dịch vụ BOT",
+      "content": "Nothing B",
+      "content_path": "https://docs.google.com/document/d/1uZ5ZsrJlBax42vwsok5U8PMP19wELMZpwFFDEvr4OO8/edit?usp=drive_link"
+    },
+    {
+      "path": "/services/dich-vu-o&m",
+      "name": "Dịch vụ O&M",
+      "content": "Nothing C",
+      "content_path": "https://docs.google.com/document/d/1Ke0ndyxFx_l0WSAM0Uzyr_YPekVlS77rSHIAgTM0yV8/edit?usp=drive_link"
+    },
+    {
+      "path": "/solutions/he-thong-dmt-ho-gia-dinh",
+      "name": "Hệ thống ĐMT HỘ GIA ĐÌNH",
+      "content": "Solutionn A",
+      "content_path": "https://docs.google.com/document/d/1H-K57kMRJWEOaTBrawSqdY4ZbP5ZCN0jcn4h0SmRMMc/edit?usp=drive_link"
+    },
+    {
+      "path": "/solutions/he-thong-dmt-doanh-nghiep",
+      "name": "Hệ thống ĐMT DOANH NGHIỆP",
+      "content": "Solutionn B",
+      "content_path": "https://docs.google.com/document/d/1Ju6RUPar7SkIQpWuELfqz3KUMGraoWueksatNr9scoI/edit?usp=drive_link"
+    },
+    {
+      "path": "/news/tin-tuc-chung-tam",
+      "name": "Tin tức chung tam",
+      "content": "Tin tuc A",
+      "content_path": "https://docs.google.com/document/d/17foGr24QoxgjXQLei4tptYOht2c1Xps_GbKcysSigWQ/edit?usp=drive_link"
+    },
+    {
+      "path": "/news/kien-thuc-chung-ve-dmt",
+      "name": "Kiến thức chung về ĐMT",
+      "content": "Tin tuc B",
+      "content_path": "https://docs.google.com/document/d/1Q8I0JgTyp0vdPgldrl_xlqL9KT6m5lkFNHYBhZ4EDgg/edit?usp=drive_link"
+    },
+    {
+      "path": "/contact",
+      "name": "LIÊN HỆ",
+      "content": "Contact"
+    }
+  ]
 }

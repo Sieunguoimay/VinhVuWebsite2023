@@ -32,13 +32,12 @@ const store = createStore({
             }
         },
         loadData(state, done) {
-            axios.get($dataUtils.getGoogleDocExportURL('https://docs.google.com/document/d/1H68sdFH5AP76Cbd-yRzpKKJGuD8-OH3piu1U00N31qM/edit?usp=sharing')) //'/src/data/website-config.json')
+            //($dataUtils.getGoogleDocExportURL('https://docs.google.com/document/d/1H68sdFH5AP76Cbd-yRzpKKJGuD8-OH3piu1U00N31qM/edit?usp=sharing')) //
+            axios.get('/src/data/website-config.json')
                 .then(response => {
-                    // Log the rendered string
-                    var jsonString = $dataUtils.getHtmlRenderedText(response.data);
-                    var data = JSON.parse(jsonString);
-                    console.log(data);
-                    console.log(response.data);
+                    // var jsonString = $dataUtils.getHtmlRenderedText(response.data);
+                    // var data = JSON.parse(jsonString);
+                    const data = response.data;
                     this.commit('setData', $dataUtils.setupStatefulData(data));
                     done();
                 })

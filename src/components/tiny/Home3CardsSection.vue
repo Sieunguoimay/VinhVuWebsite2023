@@ -12,29 +12,14 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            cards: [
-                {
-                    imageSrc: '/src/assets/cover/cover_image_1.jpg',
-                    title: "Solution 1",
-                    link: "/page1"
-                },
-                {
-                    imageSrc: '/src/assets/cover/cover_image_1.jpg',
-                    title: "Solution 2",
-                    link: "/page2"
-                },
-                {
-                    imageSrc: '/src/assets/cover/cover_image_2.jpg',
-                    title: "Solution 3",
-                    link: "/page3"
-                }
-            ],
-            loadedContent: null,
+            cards: [],
+            // loadedContent: null,
         };
     },
     mounted() {
         axios.get('/src/data/home-cards.json').then(response => {
             this.cards = response.data.slice(0, 3);
+            this.useDefaultImageIfRequire();
         }).catch(error => {
 
         });
@@ -50,6 +35,13 @@ export default {
             // Logic to navigate to another page using the provided link
             // Example:
             this.$router.push(link);
+        },
+        useDefaultImageIfRequire() {
+            this.cards.forEach(c => {
+                if (c.img == undefined) {
+                    c.img = '/src/assets/cover/cover_image_1.jpg';
+                }
+            })
         }
     }
 };
@@ -85,7 +77,7 @@ export default {
     padding: 10px;
     text-align: center;
     font-size: large;
-    height:100px;
+    height: 100px;
 
     overflow: hidden;
     display: -webkit-box;

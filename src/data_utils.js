@@ -3,6 +3,11 @@ import prefixer from 'postcss-prefix-selector'
 import postcss from 'postcss'
 import * as cheerio from 'cheerio';
 export default {
+// const axios = require('axios');
+// const prefixer = require('postcss-prefix-selector');
+// const postcss = require('postcss');
+// const cheerio = require('cheerio');
+// module.exports = {
     setupStatefulData(data) {
         data.info.logo.alt_string = "Website Name";
         data.navigation.nav_items = this.createNavItems(data);
@@ -102,7 +107,7 @@ export default {
             // exclude: ['.c'],
 
             // Optional transform callback for case-by-case overrides
-            transform: function(prefix, selector, prefixedSelector, filePath, rule) {
+            transform: function (prefix, selector, prefixedSelector, filePath, rule) {
                 if (selector === 'body') {
                     return 'body' + prefix;
                 } else {

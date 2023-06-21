@@ -28,58 +28,71 @@ const getGoogleDocExportURL = (shareUrl) => {
     const regex = /\/[^/]*\?/;
     return shareUrl.replace(regex, '/export/html?');
 }
-const filePath = './src/data/website-config.json';
-const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-const pages = jsonData.pages.filter(p => p.content_path != null);
-var requests = pages.map(p => {
-    return axios.get(getGoogleDocExportURL(p.content_path))
-});
-Promise.all(requests).then(results => {
-    const home_cards = [];
-    for (var i = 0; i < results.length; i++) {
 
-        const response = results[i];
-        const p = pages[i];
+const getHtmlRenderedText = (htmlContent) => {
+    const $ = cheerio.load(htmlContent);
+    return $('body').text().match(/("(\\.|[^"])*"|\[|\]|,|\d+|\{|\}|\:|[a-zA-Z0-9_]+)/g).join('');
+}
+function simplifyString(str) {
+    return str
+        .normalize("NFD") // Normalize to decomposed form
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/đ/gi, "d")
+        .toLowerCase() // Convert to lowercase
+        .replace(/\s+/g, "-");
+    return encodeURIComponent(str)
+        .replace(/%20/g, "-")
+    return str
+        .replace(/[^\w\s]/gi, "") // Remove special characters
+        .toLowerCase() // Convert to lowercase
+        .replace(/\s+/g, "-");
+}
+function getRelativePath(path) {
+    const segments = path.split(/\/+/); // Split the path by slashes
+    segments.pop(); // Remove the last segment
+    return segments.join("/");
+}
+// const filePath = './src/data/website-config.json';
+// const websiteConfig = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
-        p.display_name = getResponseFilename(response);
-        const $ = cheerio.load(response.data);
-        const found = $('body').find('img').first(i => i.attr('src') != undefined);
-        const firstImageSrc = found != null ? found.attr('src') : null;
+function bakeGoogleDocPages(websiteConfig) {
+    const pages = websiteConfig.pages.filter(p => p.content_path != null);
+    var requests = pages.map(p => {
+        return axios.get(getGoogleDocExportURL(p.content_path))
+    });
+    Promise.all(requests).then(results => {
+        const home_cards = [];
+        for (var i = 0; i < results.length; i++) {
 
-        var home_card = {};
-        home_card.page_path = p.path;
-        home_card.title = p.display_name;
-        home_card.img = firstImageSrc;
-        home_cards.push(home_card);
-    }
-    // console.log(home_cards);
-    // Write the modified JSON back to the file
-    fs.writeFileSync('./src/data/home-cards.json', JSON.stringify(home_cards, null, 2));
-}).catch(error => {
+            const response = results[i];
+            const p = pages[i];
 
-});
-// for (const p of jsonData.pages) {
-//     if (p.content_path == undefined) continue;
-//     if (cardCount++ >= 3) {
-//         break;
-//     }
-//     console.log(p.content_path);
+            p.name = getResponseFilename(response);
+            p.path = getRelativePath(p.path) + "/" + simplifyString(p.name);
 
-//     axios.get(getGoogleDocExportURL(p.content_path)).then(response => {
-//         // console.log(response);
-//         // p.display_name = getResponseFilename(response);
+            const $ = cheerio.load(response.data);
+            const found = $('body').find('img').first(i => i.attr('src') != undefined);
+            const firstImageSrc = found != null ? found.attr('src') : null;
 
-//         const $ = cheerio.load(response.data);
-//         const found = $('body').find('img').first(i => i.attr('src') != undefined);
-//         const firstImageSrc = found != null ? found.attr('src') : null;
+            var home_card = {};
+            home_card.page_path = p.path;
+            home_card.title = p.name;
+            home_card.img = firstImageSrc;
+            home_cards.push(home_card);
+        }
+        fs.writeFileSync('./src/data/home-cards.json', JSON.stringify(home_cards, null, 2));
+        fs.writeFileSync('./src/data/website-config.json', JSON.stringify(websiteConfig, null, 2));
+    }).catch(error => {
 
-//         var home_card = {};
-//         home_card.page_path = p.path;
-//         home_card.title = p.display_name;
-//         home_card.img_url = firstImageSrc;
-//         jsonData.home_cards.push(home_card);
-//         // console.log(home_card);
-//     }).catch(error => {
+    });
+}
 
-//     });
-// }
+axios.get(getGoogleDocExportURL('https://docs.google.com/document/d/1H68sdFH5AP76Cbd-yRzpKKJGuD8-OH3piu1U00N31qM/edit?usp=sharing'))
+    .then(response => {
+        var jsonString = getHtmlRenderedText(response.data);
+        var data = JSON.parse(jsonString);
+
+        bakeGoogleDocPages(data);
+    }).catch(error => {
+
+    });
