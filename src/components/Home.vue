@@ -10,55 +10,34 @@
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/forest-left.jpg" /></div>
                         <div class="slide-partial slide-right"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/forest-right.jpg" /></div>
-                        <!-- <h1 class="title"><span class="title-text">Forest</span></h1> -->
                     </li>
                     <li class="slide">
                         <div class="slide-partial slide-left"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/mountain-left.jpg" /></div>
                         <div class="slide-partial slide-right"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/mountain-right.jpg" /></div>
-                        <!-- <h1 class="title"><span class="title-text">Mountain</span></h1> -->
                     </li>
                     <li class="slide">
                         <div class="slide-partial slide-left"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/ocean-left.jpg" /></div>
                         <div class="slide-partial slide-right"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/ocean-right.jpg" /></div>
-                        <!-- <h1 class="title"><span class="title-text">Ocean</span></h1> -->
                     </li>
                     <li class="slide">
                         <div class="slide-partial slide-left"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/canyon-left.jpg" /></div>
                         <div class="slide-partial slide-right"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/canyon-right.jpg" /></div>
-                        <!-- <h1 class="title"><span class="title-text">Canyon</span></h1> -->
                     </li>
                     <li class="slide">
                         <div class="slide-partial slide-left"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/lake-left.jpg" /></div>
                         <div class="slide-partial slide-right"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/lake-right.jpg" /></div>
-                        <!-- <h1 class="title"><span class="title-text">Lake</span></h1> -->
                     </li>
                 </ul>
-                <!-- <ul id="slide-select">
-                    <li class="btn prev">...</li>
-                    <li class="selector"></li>
-                    <li class="selector"></li>
-                    <li class="selector"></li>
-                    <li class="selector"></li>
-                    <li class="selector"></li>
-                    <li class="btn next">...</li>
-                </ul> -->
             </div>
-            <!-- <a class="codepen-link" href="https://www.codepen.io/seanfree" target="_blank"></a> -->
         </div>
-
-        <!-- <div class="slider">
-            <transition name="slide" mode="out-in">
-                <img :key="currentSlide" class="slide" :src="slides[currentSlide]" alt="Slide">
-            </transition>
-        </div> -->
 
         <div class="main-slogan">
             <h1>{{ home_content.center_description }}</h1>
