@@ -4,8 +4,9 @@
 export default{
     data(){
         return {
-            title:"",
-            
+            display_data:{
+                
+            }
         }
     },
 }
