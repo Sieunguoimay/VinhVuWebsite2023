@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from './components/Home.vue';
 import Contact from './components/Contact.vue';
 import WritingViewer from './components/WritingViewer.vue';
+import WritingListViewer from './components/WritingListViewer.vue';
 import store from './store'
 
 const router = createRouter({
@@ -11,7 +12,8 @@ const router = createRouter({
         { path: '/contact', component: Contact },
         { path: '/services/:page?', component: WritingViewer },
         { path: '/solutions/:page?', component: WritingViewer },
-        { path: '/news/:page?', component: WritingViewer },
+        { path: '/news/:page', component: WritingViewer },
+        { path: '/newsfeed/:section?', component: WritingListViewer },
     ]
 });
 

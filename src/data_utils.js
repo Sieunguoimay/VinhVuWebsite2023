@@ -26,11 +26,29 @@ var data_utils = {
     },
     createNavItems(data) {
         var nav_items = [];
-        for (const page of data.pages) {
-            this.createNavItem(data, page, nav_items);
+        for (const navGroup of data.navigation.nav_groups) {
+            nav_items.push(this.createNavGroupItem(navGroup));
         }
+        for (const page of data.pages) {
+            if (page.show_on_nav_bar) {
+                this.createNavItem(data, page, nav_items);
+            }
+        }
+        for (const pageGroup of data.page_groups) {
+            this.createNavItem(data, pageGroup, nav_items);
+        }
+        this.swapToFirst(nav_items, nav_items.find(i => i.path == '/'));
         return nav_items;
     },
+    swapToFirst(arr, element) {
+        const index = arr.indexOf(element);
+        if (index > -1) {
+            arr.splice(index, 1);
+            arr.unshift(element);
+        }
+        return arr;
+    },
+
     createNavItem(data, page, nav_items) {
         var navGroup = this.findNavGroup(data, page.path);
         if (navGroup != null) {
@@ -64,11 +82,18 @@ var data_utils = {
         return new RegExp(subString).test(mainString);
     },
     createNavGroupItem(nav_group) {
+        var subNavItems = [];
+        if (nav_group.sub_nav_items != undefined) {
+            subNavItems = nav_group.sub_nav_items;
+            for (var i of subNavItems) {
+                i.is_current = false;
+            }
+        }
         return {
             display_name: nav_group.display_name,
             path: nav_group.path,
             has_sub_nav_items: true,
-            sub_nav_items: [],
+            sub_nav_items: subNavItems,
         };
     },
     getPageDisplayPath(data, path) {
