@@ -67,25 +67,40 @@ const store = createStore({
             if (page == null) return "";
             $dataUtils.loadPageContentIfRequire(page, params.resultCallback, !data.settings.optimize_for_speed);
         },
-        getPageGroupData(state, params) {
+        tryLoadPageGroupData(state, params) {
             var pg = this.state.data.page_groups.find(g => g.path == params.pageGroupPath);
-            var pages = this.state.data.pages.filter(p => p.page_group_id == pg.id);
-            if (pg.is_loaded == undefined || pg.cards == undefined) {
-                $dataUtils.sendGetRequests(pages.map(g => $dataUtils.getGoogleDocExportURL(g.content_path)),(responses,errors)=>{
-                    if(errors==null){
-                        
-                    }else{
+            var pagesOfGroup = this.state.data.pages.filter(p => p.page_group_id == pg.id && (p.content_loaded == undefined || p.content_loaded == false));
+            if (pagesOfGroup.length > 0) {
+                $dataUtils.sendGetRequests(pagesOfGroup.map(g => $dataUtils.getGoogleDocExportURL(g.content_path)), (responses, errors) => {
+                    if (errors == null) {
+                        pg.pages = [];
+                        for (var i = 0; i < pagesOfGroup.length; i++) {
+                            const response = responses[i];
+                            const page = pagesOfGroup[i];
+
+                            page.content = $dataUtils.optimizeHtml(response.data);
+                            page.content_loaded = true;
+                            $dataUtils.enrichPageData(page, response);
+
+                            pg.pages.push(page);
+                        }
+                        params.output();
+                    } else {
 
                     }
                 });
+            } else {
+                pg.pages = [];
+                for (const page of this.state.data.pages.filter(p => p.page_group_id == pg.id)) {
+                    pg.pages.push(page);
+                }
+                // params.output(pg);
+                params.output();
             }
-            params.output(pg);
         }
-
     },
 
-    getters: {
-    },
+    getters: {},
     modules: {
 
     },

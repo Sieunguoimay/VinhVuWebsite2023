@@ -77,7 +77,9 @@ var data_utils = {
     findNavGroup(data, path) {
         return data.navigation.nav_groups.find(g => this.containsString(path, g.path))
     },
-
+    findPageGroup(data, path) {
+        return data.page_groups.find(g => path == g.path)
+    },
     containsString(mainString, subString) {
         return new RegExp(subString).test(mainString);
     },
@@ -97,15 +99,25 @@ var data_utils = {
         };
     },
     getPageDisplayPath(data, path) {
-        var page = this.findPageByPath(data, path);
-        if (page == null) {
-            return null;
+        var pageGroup = this.findPageGroup(data, path);
+        if (pageGroup != null) {
+            var navGroup = this.findNavGroup(data, path);
+            if (navGroup == null) {
+                return [pageGroup.name];
+            }
+            return [navGroup.display_name, pageGroup.name]
+        } else {
+            var page = this.findPageByPath(data, path);
+            if (page == null) {
+                return null;
+            }
+
+            var navGroup = this.findNavGroup(data, path);
+            if (navGroup == null) {
+                return [page.name];
+            }
+            return [navGroup.display_name, page.name]
         }
-        var navGroup = this.findNavGroup(data, path);
-        if (navGroup == null) {
-            return [page.name];
-        }
-        return [navGroup.display_name, page.name]
     },
     optimizeHtml(html) {
         const $ = cheerio.load(html);
@@ -135,7 +147,7 @@ var data_utils = {
             // exclude: ['.c'],
 
             // Optional transform callback for case-by-case overrides
-            transform: function (prefix, selector, prefixedSelector, filePath, rule) {
+            transform: function(prefix, selector, prefixedSelector, filePath, rule) {
                 if (selector === 'body') {
                     return 'body' + prefix;
                 } else {
@@ -156,7 +168,8 @@ var data_utils = {
             });
     },
     sendGetRequests(urls, resultCallback) {
-        var requests = urls.forEach(p => {
+
+        var requests = urls.map(p => {
             return axios.get(p)
         });
 
@@ -196,7 +209,6 @@ var data_utils = {
         return $('body').text().match(/("(\\.|[^"])*"|\[|\]|,|\d+|\{|\}|\:|[a-zA-Z0-9_]+)/g).join('');
     },
     simplifyString(str) {
-
         return str
             .normalize("NFD") // Normalize to decomposed form
             .replace(/[\u0300-\u036f]/g, "")
@@ -207,7 +219,8 @@ var data_utils = {
     getFirstImage(html) {
         const $ = cheerio.load(html);
         const found = $('body').find('img').first(i => i.attr('src') != undefined);
-        return found != null ? found.attr('src') : null;
+        const img = found.attr('src');
+        return img != null ? img : '/src/assets/placeholder.png';
     },
     loadPageContentIfRequire(page, callback, isFromGoogleDoc) {
         if (page.content_loaded == undefined || page.content_loaded == false) {
@@ -222,7 +235,6 @@ var data_utils = {
                     if (isFromGoogleDoc) {
                         this.enrichPageData(page, response);
                     }
-
                     callback(page);
                 });
                 return;
@@ -234,6 +246,7 @@ var data_utils = {
         page.name = this.getResponseFilename(response);
         page.simplified_name = this.simplifyString(page.name);
         page.path = this.getRelativePath(page.path) + "/" + page.simplified_name;
+        page.img = this.getFirstImage(page.content);
     },
     getRelativePath(path) {
         const segments = path.split(/\/+/); // Split the path by slashes
@@ -242,9 +255,9 @@ var data_utils = {
     },
     getPreviewContent(html) {
         const $ = cheerio.load(html);
-        return this.getFirst20Words($('body').text(), 30) + "..";
+        return this.getFirstNWords($('body').text(), 30) + "..";
     },
-    getFirst20Words(str, count) {
+    getFirstNWords(str, count) {
         const words = str.split(' ');
         const first20Words = words.slice(0, count);
         const result = first20Words.join(' ');
