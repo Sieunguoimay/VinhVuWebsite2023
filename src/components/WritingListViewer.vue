@@ -26,6 +26,7 @@
 .layout {
     display: flex;
     flex-direction: row;
+    margin-bottom: 20px;
 }
 
 .left {
@@ -38,8 +39,37 @@
 .left .group-buttons {
     display: flex;
     flex-direction: column;
+    margin-top:10px;
 }
 
+.group-buttons a{
+    padding: 10px;
+    text-decoration: none;
+    margin-bottom:5px;
+}
+.group-buttons a:not(.router-link-active) {
+    --group-button-text-color:gray;
+    color:var(--group-button-text-color);
+}
+
+.group-buttons a:not(.router-link-active)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  border-bottom: 2px solid #37923748;
+}
+
+.group-buttons a:hover:not(.router-link-active){
+    --group-button-text-color:#379237;
+}
+.router-link-active{
+    background-color: #379237;
+    --group-button-text-color:white;
+    color:var(--group-button-text-color);
+}
 .right {
     margin-left: 10px;
     margin-right: 10px;

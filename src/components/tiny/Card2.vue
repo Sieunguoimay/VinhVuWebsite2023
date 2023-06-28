@@ -1,8 +1,10 @@
 <template>
-    <div class="card">
-        <figure>
+    <div class="card" @click="navigateTo(card.page_path)">
+        <!-- < figure > -->
+        <div class=" frame">
             <img :src="card.img" alt="">
-        </figure>
+        </div>
+        <!-- </figure> -->
         <h2 class="title">{{ title }} </h2>
     </div>
 </template>
@@ -43,12 +45,13 @@ export default {
     border: 1px solid rgb(245, 245, 245);
 }
 
-.card figure {
+.card .frame {
     height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .card img {
@@ -62,6 +65,7 @@ export default {
     margin: 10px;
     font-size: 1rem;
     --title-color: inherit;
+    ;
     color: var(--title-color);
 }
 
