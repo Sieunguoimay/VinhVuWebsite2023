@@ -1,10 +1,5 @@
 <template>
     <div class="articles">
-        <!-- <div v-for="(card, index) in cards" :key="index" class="card" @click="navigateTo(card.page_path)">
-            <img :src="card.img" alt="Card Image" class="card-image" />
-            <div class="card-title">{{ card.title.toUpperCase() }}</div>
-        </div> -->
-
         <article v-for="(card, index) in cards" :key="index" class="card" @click="navigateTo(card.page_path)">
             <div class="article-wrapper">
                 <figure>
@@ -36,7 +31,6 @@ export default {
     data() {
         return {
             cards: [],
-            // loadedContent: null,
         };
     },
     computed: {
@@ -59,13 +53,6 @@ export default {
                     path: p.path,
                     resultCallback: resultPage => {
                         this.cards.push($dataUtils.createCardData(resultPage,resultPage.content));
-                        // const firstImageSrc = $dataUtils.getFirstImage(resultPage.content);
-                        // this.cards.push({
-                        //     page_path: resultPage.path,
-                        //     title: resultPage.name,
-                        //     img: firstImageSrc == null ? '/src/assets/cover/cover_image_1.jpg' : firstImageSrc,
-                        //     preview_content: $dataUtils.getPreviewContent(resultPage.content)
-                        // });
                     }
                 });
             }
@@ -114,9 +101,7 @@ article a::after {
 /* basic article elements styling */
 article h2 {
     margin: 0 0 18px 0;
-    /* font-family: "Bebas Neue", cursive; */
     font-size: 1.9rem;
-    /* letter-spacing: 0.06em; */
     color: var(--title-color);
     transition: color 0.3s ease-out;
 }
@@ -160,7 +145,6 @@ article a .icon {
     transition: all 0.3s;
 }
 
-/* using the has() relational pseudo selector to update our custom properties */
 article:has(:hover, :focus) {
     --img-scale: 1.1;
     --title-color: #379237;
@@ -170,25 +154,12 @@ article:has(:hover, :focus) {
 }
 
 
-/************************ 
-Generic layout (demo looks)
-**************************/
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
-
-/* body {
-  margin: 0;
-  padding: 48px 0;
-  font-family: "Figtree", sans-serif;
-  font-size: 1.2rem;
-  line-height: 1.6rem;
-  background-image: linear-gradient(45deg, #7c9885, #b5b682);
-  min-height: 100vh;
-} */
 
 .articles {
     display: grid;

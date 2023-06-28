@@ -20,6 +20,9 @@ const store = createStore({
                     i.is_current = currentPath == i.path;
                 }
             });
+            state.data.page_groups.forEach(i => {
+                i.is_current = currentPath == i.path;
+            });
         },
         setData(state, data) {
             state.data = data;
@@ -63,11 +66,25 @@ const store = createStore({
             var page = data.pages.find(p => p.path == params.path);
             if (page == null) return "";
             $dataUtils.loadPageContentIfRequire(page, params.resultCallback, !data.settings.optimize_for_speed);
+        },
+        getPageGroupData(state, params) {
+            var pg = this.state.data.page_groups.find(g => g.path == params.pageGroupPath);
+            var pages = this.state.data.pages.filter(p => p.page_group_id == pg.id);
+            if (pg.is_loaded == undefined || pg.cards == undefined) {
+                $dataUtils.sendGetRequests(pages.map(g => $dataUtils.getGoogleDocExportURL(g.content_path)),(responses,errors)=>{
+                    if(errors==null){
+                        
+                    }else{
+
+                    }
+                });
+            }
+            params.output(pg);
         }
+
     },
 
     getters: {
-
     },
     modules: {
 

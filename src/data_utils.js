@@ -135,7 +135,7 @@ var data_utils = {
             // exclude: ['.c'],
 
             // Optional transform callback for case-by-case overrides
-            transform: function(prefix, selector, prefixedSelector, filePath, rule) {
+            transform: function (prefix, selector, prefixedSelector, filePath, rule) {
                 if (selector === 'body') {
                     return 'body' + prefix;
                 } else {
@@ -154,6 +154,17 @@ var data_utils = {
                 console.error('Error fetching raw HTML:', error);
                 resultCallback("", error);
             });
+    },
+    sendGetRequests(urls, resultCallback) {
+        var requests = urls.forEach(p => {
+            return axios.get(p)
+        });
+
+        Promise.all(requests).then(responses => {
+            resultCallback(responses, null);
+        }).catch(errors => {
+            resultCallback(null, errors);
+        });
     },
     getGoogleDocExportURL(shareUrl) {
         const regex = /\/[^/]*\?/;
