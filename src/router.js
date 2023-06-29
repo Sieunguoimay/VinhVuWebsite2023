@@ -14,6 +14,9 @@ const router = createRouter({
         { path: '/solutions/:page?', component: WritingViewer },
         { path: '/news/:page', component: WritingViewer },
         { path: '/newsfeed/:section?', component: WritingListViewer },
+        { path: '/solutions/business', component: WritingListViewer },
+        { path: '/:pathMatch(.*)*', name: 'not-found', redirect: '/' },
+        { path: '/:pathMatch(.*)', name: 'bad-not-found', redirect: '/' },
     ]
 });
 

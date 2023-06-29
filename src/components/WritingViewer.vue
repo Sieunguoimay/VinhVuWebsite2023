@@ -1,5 +1,6 @@
 <template>
-    <div class="main-body" v-html="loadedContent"></div>
+    <div class="main-body clamped-content-width-center" v-html="loadedContent"></div>
+    <ExploreMoreSection/>
 </template>
 <style scoped>
 .main-body {
@@ -7,8 +8,11 @@
 }
 </style>
 <script>
-
+import ExploreMoreSection from './tiny/ExploreMoreSection.vue';
 export default {
+    components:{
+        ExploreMoreSection,
+    },
     data() {
         return {
             loadedContent: null,
@@ -41,6 +45,11 @@ export default {
                 resultCallback: (page) => {
                     console.log(page);
                     target.loadedContent = page.content;
+                }
+            });
+            this.$store.dispatch('tryLoadExploreMoreData', {
+                output: (data) => {
+                    console.log(this.$store.state.data.explore_more_data);
                 }
             });
         }

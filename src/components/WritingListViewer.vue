@@ -15,6 +15,7 @@
                 </div>
             </div>
         </div>
+        <ExploreMoreSection/>
         <!-- <div class="log">
             <div>
                 {{ this.group_data }}
@@ -23,6 +24,9 @@
     </div>
 </template>
 <style scoped>
+.container{
+    margin-top:50px;
+}
 .layout {
     display: flex;
     flex-direction: row;
@@ -39,37 +43,40 @@
 .left .group-buttons {
     display: flex;
     flex-direction: column;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
-.group-buttons a{
+.group-buttons a {
     padding: 10px;
     text-decoration: none;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
+
 .group-buttons a:not(.router-link-active) {
-    --group-button-text-color:gray;
-    color:var(--group-button-text-color);
+    --group-button-text-color: gray;
+    color: var(--group-button-text-color);
 }
 
 .group-buttons a:not(.router-link-active)::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  border-bottom: 2px solid #37923748;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    border-bottom: 2px solid #37923748;
 }
 
-.group-buttons a:hover:not(.router-link-active){
-    --group-button-text-color:#379237;
+.group-buttons a:hover:not(.router-link-active) {
+    --group-button-text-color: #379237;
 }
-.router-link-active{
+
+.router-link-active {
     background-color: #379237;
-    --group-button-text-color:white;
-    color:var(--group-button-text-color);
+    --group-button-text-color: white;
+    color: var(--group-button-text-color);
 }
+
 .right {
     margin-left: 10px;
     margin-right: 10px;
@@ -79,18 +86,18 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 2%;
+    justify-content: stretch;
+    gap: 20px;
 }
 
 .grid-cell {
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
 }
 
 @media (min-width: 1200px) {
-    .grid-cell {
+    /* .grid-cell {
         width: 30%;
-    }
+    } */
 }
 
 @media (min-width:768px) and (max-width: 1200px) {
@@ -98,9 +105,9 @@
         display: none;
     }
 
-    .grid-cell {
+    /* .grid-cell {
         width: 30%;
-    }
+    } */
 }
 
 @media (max-width: 768px) {
@@ -108,17 +115,19 @@
         display: none;
     }
 
-    .grid-cell {
+    /* .grid-cell {
         width: 49%;
-    }
+    } */
 }
 </style>
 <script>
 import Card2 from './tiny/Card2.vue';
+import ExploreMoreSection from './tiny/ExploreMoreSection.vue';
 import $dataUtils from '../data_utils'
 export default {
     components: {
-        Card2
+        Card2,
+        ExploreMoreSection
     },
     data() {
         return {
@@ -126,7 +135,7 @@ export default {
     },
     mounted() {
     },
-    beforeDestroy() {
+    beforeDestroy() {   
     },
     beforeRouteEnter(to, from, next) {
         next(vm => {
@@ -141,7 +150,16 @@ export default {
         currentGroupPath() {
             return this.$route.path;
         },
-        groups() { return this.$store.state.data.page_groups; },
+        nav_group() {
+            if (this.$store.state.data.navigation.nav_groups == undefined) return null;
+            return this.$store.state.data.navigation.nav_groups.find(ng => this.$route.path.startsWith(ng.path));
+        },
+        groups() {
+            if (this.nav_group == null) {
+                return this.$store.state.data.page_groups;
+            }
+            return this.$store.state.data.page_groups.filter(pg => pg.path.startsWith(this.nav_group.path));
+        },
         group_data() { return this.groups.find(g => g.path == this.$route.path) },
         cards() {
             if (this.group_data.pages != undefined) {
@@ -159,7 +177,12 @@ export default {
                     // console.log(data);
                 }
             });
-            console.log(this.cards);
+            console.log(this.$route);
+            $this.$store.dispatch('tryLoadExploreMoreData', {
+                output: (data) => {
+                    console.log($this.$store.state.data.explore_more_data);
+                }
+            });
         },
     }
 }

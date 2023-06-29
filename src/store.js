@@ -71,30 +71,40 @@ const store = createStore({
             var pg = this.state.data.page_groups.find(g => g.path == params.pageGroupPath);
             var pagesOfGroup = this.state.data.pages.filter(p => p.page_group_id == pg.id && (p.content_loaded == undefined || p.content_loaded == false));
             if (pagesOfGroup.length > 0) {
-                $dataUtils.sendGetRequests(pagesOfGroup.map(g => $dataUtils.getGoogleDocExportURL(g.content_path)), (responses, errors) => {
+                $dataUtils.fetchPages(pagesOfGroup, errors => {
                     if (errors == null) {
-                        pg.pages = [];
-                        for (var i = 0; i < pagesOfGroup.length; i++) {
-                            const response = responses[i];
-                            const page = pagesOfGroup[i];
-
-                            page.content = $dataUtils.optimizeHtml(response.data);
-                            page.content_loaded = true;
-                            $dataUtils.enrichPageData(page, response);
-
-                            pg.pages.push(page);
-                        }
                         params.output();
-                    } else {
-
                     }
-                });
+                })
             } else {
                 pg.pages = [];
                 for (const page of this.state.data.pages.filter(p => p.page_group_id == pg.id)) {
                     pg.pages.push(page);
                 }
                 // params.output(pg);
+                params.output();
+            }
+        },
+        tryLoadExploreMoreData(state, params) {
+            if (this.state.data.explore_more_data.cards == undefined) {
+                var pagesToLoad = [];
+                for (const p of this.state.data.pages) {
+                    if (p.content_path != undefined && p.content_loaded == undefined || p.content_loaded == false) {
+                        pagesToLoad.push(p);
+                    }
+                }
+                if (pagesToLoad.length == 0) {
+                    this.state.data.explore_more_data.cards = $dataUtils.generateExploreMoreData(this.state.data.pages);
+                    params.output();
+                } else {
+                    $dataUtils.fetchPages(pagesToLoad, errors => {
+                        if (errors == null) {
+                            this.state.data.explore_more_data.cards = $dataUtils.generateExploreMoreData(this.state.data.pages);
+                            params.output();
+                        }
+                    })
+                }
+            } else {
                 params.output();
             }
         }

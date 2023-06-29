@@ -1,7 +1,7 @@
 <template>
     <div class="card" @click="navigateTo(card.page_path)">
         <!-- < figure > -->
-        <div class=" frame">
+        <div class="frame">
             <img :src="card.img" alt="">
         </div>
         <!-- </figure> -->
@@ -49,13 +49,12 @@ export default {
     justify-content: stretch;
     gap: 5px;
     padding-bottom: 5px;
-    ;
 }
 
 .card .frame {
-    height: 200px;
     display: flex;
     flex-direction: column;
+    height: 150px;
     align-items: center;
     justify-content: center;
     overflow: hidden;

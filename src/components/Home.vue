@@ -5,13 +5,17 @@
 
             <div id="container">
                 <ul id="slides">
-                    <li class="slide">
+                    <li class="slide" v-for="slide in slides" :key="slide.left">
+                        <div class="slide-partial slide-left"><img :src="slide.left" /></div>
+                        <div class="slide-partial slide-right"><img :src="slide.right" /></div>
+                    </li>
+                    <!-- <li class="slide">
                         <div class="slide-partial slide-left"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/forest-left.jpg" /></div>
                         <div class="slide-partial slide-right"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/forest-right.jpg" /></div>
-                    </li>
-                    <li class="slide">
+                    </li> -->
+                    <!-- <li class="slide">
                         <div class="slide-partial slide-left"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/mountain-left.jpg" /></div>
                         <div class="slide-partial slide-right"><img
@@ -34,7 +38,7 @@
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/lake-left.jpg" /></div>
                         <div class="slide-partial slide-right"><img
                                 src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/lake-right.jpg" /></div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -54,6 +58,7 @@
     /* padding-top: 2px; */
     margin-bottom: 40px;
 }
+
 .slideshow-container {
     height: 500px;
     width: 100%;
@@ -236,6 +241,10 @@ export default {
     computed: {
         home_content() {
             return this.$store.state.data.pages.find(p => p.path == '/').content;
+        },
+        
+        slides() {
+            return this.$store.state.data.slides;
         }
     },
     components: {
@@ -243,10 +252,12 @@ export default {
     },
     data() {
         return {
-            slides: [
-                '/src/assets/cover/cover_image_1.jpg',
-                '/src/assets/cover/cover_image_2.jpg',
-            ],
+            // slides: [
+            //     {
+            //         left: '/src',
+            //         right: '/src'
+            //     }
+            // ],
             currentSlide: 0,
         };
     },

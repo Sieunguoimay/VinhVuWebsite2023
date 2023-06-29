@@ -179,6 +179,35 @@ var data_utils = {
             resultCallback(null, errors);
         });
     },
+    fetchPages(pages, done) {
+        this.sendGetRequests(pages.map(g => this.getGoogleDocExportURL(g.content_path)), (responses, errors) => {
+            if (errors == null) {
+                pg.pages = [];
+                for (var i = 0; i < pages.length; i++) {
+                    const response = responses[i];
+                    const page = pages[i];
+
+                    page.content = this.optimizeHtml(response.data);
+                    page.content_loaded = true;
+                    this.enrichPageData(page, response);
+
+                    pg.pages.push(page);
+                }
+                done(null);
+            } else {
+                done(errors);
+            }
+        });
+    },
+    generateExploreMoreData(allPages) {
+        var cards = [];
+        for (const p of allPages) {
+            if (p.content_loaded) {
+                cards.push(this.createCardData(p, p.content));
+            }
+        }
+        return cards;
+    },
     getGoogleDocExportURL(shareUrl) {
         const regex = /\/[^/]*\?/;
         return shareUrl.replace(regex, '/export/html?');

@@ -2,9 +2,12 @@
 import Header from "./components/Header.vue"
 import Footer from "./components/Footer.vue"
 import PagePathBar from "./components/tiny/PagePathBar.vue"
+import Spinner from "./components/tiny/Spinner.vue"
 </script>
 
 <template>
+  <Spinner v-if="$store.state.data == null"/>
+
   <main v-if="$store.state.data != null">
     <Header />
     <PagePathBar class="clamped-content-width-center" />
@@ -13,7 +16,6 @@ import PagePathBar from "./components/tiny/PagePathBar.vue"
     <!-- <PriceConsultantBar /> -->
   </main>
 
-  
 </template>
 
 <style scoped>
@@ -31,7 +33,7 @@ main {
 <script>
 export default {
   mounted() {
-    this.$store.dispatch('loadData',()=>{
+    this.$store.dispatch('loadData', () => {
       this.$store.dispatch('updateNavigationItemCurrent', this.$route.path);
     });
   },

@@ -2,7 +2,7 @@
     <div class="header ">
         <div class="header-container clamped-content-width-center">
             <div class="logo header-item" id="main-header">
-                <router-link :to="`${navigation.nav_items[0].target_page_index}`">
+                <router-link to="/">
                     <img :src="'/src/assets' + info.logo.img" :alt="info.logo.alt_string">
                 </router-link>
 

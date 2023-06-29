@@ -40,7 +40,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 article {
     --img-scale: 1.001;
     --title-color: black;
