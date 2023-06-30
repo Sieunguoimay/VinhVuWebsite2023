@@ -43,8 +43,8 @@ export default {
             target.$store.dispatch('getPageContent', {
                 path: to.path,
                 resultCallback: (page) => {
-                    console.log(page);
                     target.loadedContent = page.content;
+                    console.log(page.content);
                 }
             });
             this.$store.dispatch('tryLoadExploreMoreData', {

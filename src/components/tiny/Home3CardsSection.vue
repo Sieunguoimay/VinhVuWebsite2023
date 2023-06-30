@@ -47,7 +47,7 @@ export default {
         useDefaultImageIfRequire() {
             this.cards.forEach(c => {
                 if (c.img == undefined) {
-                    c.img = '/src/assets/cover/cover_image_1.jpg';
+                    c.img = '/src/assets/placeholder.png';
                 }
             })
         }

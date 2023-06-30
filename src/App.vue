@@ -3,6 +3,7 @@ import Header from "./components/Header.vue"
 import Footer from "./components/Footer.vue"
 import PagePathBar from "./components/tiny/PagePathBar.vue"
 import Spinner from "./components/tiny/Spinner.vue"
+
 </script>
 
 <template>
@@ -37,5 +38,6 @@ export default {
       this.$store.dispatch('updateNavigationItemCurrent', this.$route.path);
     });
   },
+  
 }
 </script>

@@ -179,25 +179,29 @@ var data_utils = {
             resultCallback(null, errors);
         });
     },
-    fetchPages(pages, done) {
-        this.sendGetRequests(pages.map(g => this.getGoogleDocExportURL(g.content_path)), (responses, errors) => {
+    fetchPages(optimize_for_speed, pages, done) {
+        var urls = optimize_for_speed ? pages.map(g => g.content_path) : pages.map(g => this.getGoogleDocExportURL(g.content_path));
+        this.sendGetRequests(urls, (responses, errors) => {
+            console.log(errors);
             if (errors == null) {
-                pg.pages = [];
+                //pg.pages = [];
                 for (var i = 0; i < pages.length; i++) {
                     const response = responses[i];
                     const page = pages[i];
 
                     page.content = this.optimizeHtml(response.data);
                     page.content_loaded = true;
-                    this.enrichPageData(page, response);
-
-                    pg.pages.push(page);
+                    if (!optimize_for_speed) {
+                        this.enrichPageData(page, response);
+                    }
+                    //pg.pages.push(page);
                 }
                 done(null);
             } else {
                 done(errors);
             }
         });
+
     },
     generateExploreMoreData(allPages) {
         var cards = [];
@@ -244,6 +248,27 @@ var data_utils = {
             .replace(/đ/gi, "d")
             .toLowerCase() // Convert to lowercase
             .replace(/\s+/g, "-");
+    },
+    getDocumentTitle(data) {
+        for (const ni of data.navigation.nav_items) {
+            if (ni.has_sub_nav_items) {
+                for (const sni of ni.sub_nav_items) {
+                    if (sni.is_current) {
+                        return sni.display_name;
+                    }
+                }
+            } else {
+                if (ni.is_current) {
+                    return ni.display_name;
+                }
+            }
+        }
+        for (const pg of data.page_groups) {
+            if (pg.is_current) {
+                return pg.name;
+            }
+        }
+        return null;
     },
     getFirstImage(html) {
         const $ = cheerio.load(html);
@@ -297,7 +322,7 @@ var data_utils = {
         return {
             page_path: page.path,
             title: page.name,
-            img: firstImageSrc == null ? '/src/assets/cover/cover_image_1.jpg' : firstImageSrc,
+            img: firstImageSrc == null ? '/src/assets/placeholder.png' : firstImageSrc,
             preview_content: this.getPreviewContent(html)
         };
     }

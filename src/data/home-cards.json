@@ -1,44 +1,86 @@
 [
   {
-    "page_path": "/services/dich-vu-epc",
-    "title": "Dịch vụ EPC",
-    "img": "https://lh6.googleusercontent.com/xyb_64Lnq-awVOVpWbzM7lWCe20uk_WkMwCzdExT2jZ-gimUA_yYrS36JVQSWNhRfk2JOoZJyEjPqHanDXwbkBx3RzCNOykufr_dsi7cjeLuVgVUlqeaRQg7h-Z1gOpO-WN_WdqIezZR1_Ic",
-    "preview_content": "Tổng quan về EPCVST triển khai mô hình EPC – chìa khóa trao tay. Với kinh nghiệm và năng lực triển khai dự án hiện tại, VST luôn đảm bảo đáp.."
+    "page_path": "/services/tam-pv-nang-luong-mat-troi",
+    "title": "Tấm PV năng lượng mặt trời",
+    "img": "/src/assets/placeholder.png",
+    "preview_content": ".."
   },
   {
-    "page_path": "/services/dich-vu-bot",
-    "title": "Dịch vụ BOT",
-    "img": "https://lh4.googleusercontent.com/Wq8PfOYssFcdYtFWsZQ-ONCss3XPqxja_h6cvMs4Qf-2ESGGENIs9K6aqvqb3bN8_CPwJw-KUlCcs4wBIeDGiTn_oObDb0bd-y4RobET80yn3osskp4KF2rUpmM_pk99aYDXjoy12NzQzAca",
-    "preview_content": "Tổng quan về BOT/PPABOT/PPA là mô hình dành cho các doanh nghiệp có nhu cầu sử dụng điện mặt trời nhưng chưa thể đầu tư. Khi này, VST và đối.."
+    "page_path": "/services/solar-inverter",
+    "title": "Solar inverter",
+    "img": "/src/assets/placeholder.png",
+    "preview_content": ".."
   },
   {
-    "page_path": "/services/dich-vu-o&m",
+    "page_path": "/services/bo-luu-tru",
+    "title": "Bộ lưu trữ",
+    "img": "/src/assets/placeholder.png",
+    "preview_content": ".."
+  },
+  {
+    "page_path": "/services/phu-kien-gia-do-tam-pv",
+    "title": "Phụ kiện giá đỡ tấm PV",
+    "img": "/src/assets/placeholder.png",
+    "preview_content": ".."
+  },
+  {
+    "page_path": "/services/den-nang-luong-mat-troi",
+    "title": "Đèn năng lượng mặt trời",
+    "img": "/src/assets/placeholder.png",
+    "preview_content": ".."
+  },
+  {
+    "page_path": "/services/quat-nang-luong-mat-troi",
+    "title": "Quạt năng lượng mặt trời",
+    "img": "/src/assets/placeholder.png",
+    "preview_content": ".."
+  },
+  {
+    "page_path": "/solutions/lap-dat-dmt-ho-gia-dinh",
+    "title": "Lắp đặt ĐMT HỘ GIA ĐÌNH",
+    "img": "/src/assets/placeholder.png",
+    "preview_content": ".."
+  },
+  {
+    "page_path": "/solutions/dich-vu-o&m",
     "title": "Dịch vụ O&M",
-    "img": "https://lh4.googleusercontent.com/caQX5cuIElhEBRFztS0sUql_lTQbgePcTpvd73b-BphZtDq-YbvWavKMgCA-JCGMrZreE_20ZtFbZ82laOVUESi5OSOKpgNnIf8n8c_5nebD48g41vC-CZMaerZDZlF61y6g5tEe5mRtegPd",
-    "preview_content": "Tổng quan về O&MVST cung cấp giải pháp O&M (Operation & Maintenance) - vận hành bảo trì và dịch vụ hỗ trợ kỹ thuật cần thiết, đảm bảo hệ thống luôn.."
+    "img": "https://lh6.googleusercontent.com/SknYJIt9SHdDj_AizIXOY0GX4gLqQ058Lyk5_Z9Gubbj1gaZtZcN2QLmVWwHWGSjOOQunzhv3VfwAIFZEAzdhHAQ9CG5IAaQ35SSrIWw6W1l_T2GTp9Ql9FrxS0RZcmyxgskYS3YBsmyJXdD",
+    "preview_content": "Tổng quan về O&MVST cung cấp giải pháp O&M (Operation & Maintenance) - vận hành bảo trì và dịch vụ hỗ trợ kỹ thuật cần thiết, đảm bảo hệ thống.."
   },
   {
-    "page_path": "/solutions/he-thong-dmt-ho-gia-dinh",
-    "title": "Hệ thống ĐMT HỘ GIA ĐÌNH",
-    "img": "/src/assets/cover/cover_image_1.jpg",
-    "preview_content": "Hệ thống ĐMT HỘ GIA ĐÌNH.."
+    "page_path": "/solutions/dich-vu-epc",
+    "title": "Dịch vụ EPC",
+    "img": "https://lh6.googleusercontent.com/VtJJIJusYK88trXAWPjXlEmLyPPvfrI05Zkr4BYqL8j5-YuQlCPuKOghB4InGiZIqG3S1mawNbtOkHrDdaXgeB086m7LRNss9hxBhFs-89SrExfBlxOH5kp1yhiXQWwl42Clua2pZpO8GRZP",
+    "preview_content": "Tổng quan về EPCVST triển khai mô hình EPC – chìa khóa trao tay. Với kinh nghiệm và năng lực triển khai dự án hiện tại, VST luôn đảm bảo.."
   },
   {
-    "page_path": "/solutions/he-thong-dmt-doanh-nghiep",
-    "title": "Hệ thống ĐMT DOANH NGHIỆP",
-    "img": "/src/assets/cover/cover_image_1.jpg",
-    "preview_content": "Hệ thống ĐMT DOANH NGHIỆP.."
+    "page_path": "/solutions/dich-vu-bot",
+    "title": "Dịch vụ BOT",
+    "img": "https://lh3.googleusercontent.com/XTn6yBQn-NoqiMDRM5KNScUlXs7dTVZ_rGsvI0T_KmDKi_xhoRWOy_E9IkGWCQIToPagdndO6sATMeYo7kJGBmu4t51cxBaFTkdGXVvkxgqT-4vfyDCwISKN4BBffDkhnxe6ct-8EG07T6lz",
+    "preview_content": "Tổng quan về BOT/PPABOT/PPA là mô hình dành cho các doanh nghiệp có nhu cầu sử dụng điện mặt trời nhưng chưa thể đầu tư. Khi này, VST và đối.."
   },
   {
     "page_path": "/news/tin-tuc-chung",
     "title": "Tin tức chung",
-    "img": "/src/assets/cover/cover_image_1.jpg",
-    "preview_content": "Tin tức chung.."
+    "img": "https://lh5.googleusercontent.com/i1yTfUep_rHd7vR9hmxGhXvRkrM42kdkp_9PKK1TtrFY2HwlzXwM1FKxy2PnEs8m2cLR3Qn6DIDG346q-sp3nOAbw4Pg62RyRXop2pTvT_E0AwO3wxX9_j822F0ut8KSxT_yoNAhqcpxTcPA",
+    "preview_content": "ƯU ĐÃI VỀ CHI PHÍ LẮP ĐẶT ĐIỆN MẶT TRỜI TẠI HẢI DƯƠNG 2020Vtechs Viet NamCông ty chúng tôi với đội ngũ nhân viên lành nghề, kinh nghiệm lâu năm.."
+  },
+  {
+    "page_path": "/news/tin-tuc-chung",
+    "title": "Tin tức chung",
+    "img": "https://lh5.googleusercontent.com/i1yTfUep_rHd7vR9hmxGhXvRkrM42kdkp_9PKK1TtrFY2HwlzXwM1FKxy2PnEs8m2cLR3Qn6DIDG346q-sp3nOAbw4Pg62RyRXop2pTvT_E0AwO3wxX9_j822F0ut8KSxT_yoNAhqcpxTcPA",
+    "preview_content": "ƯU ĐÃI VỀ CHI PHÍ LẮP ĐẶT ĐIỆN MẶT TRỜI TẠI HẢI DƯƠNG 2020Vtechs Viet NamCông ty chúng tôi với đội ngũ nhân viên lành nghề, kinh nghiệm lâu năm.."
   },
   {
     "page_path": "/news/kien-thuc-chung-ve-dmt",
     "title": "Kiến thức chung về ĐMT",
-    "img": "/src/assets/cover/cover_image_1.jpg",
-    "preview_content": "Kiến thức chung về ĐMT.."
+    "img": "https://lh3.googleusercontent.com/suk9JJGDduf7YYC11wQF7SBsK2vp0SD9PezSfTLlqjVXZJtQKePOAPCpxYZ_zMeWJUEMtTZnXnBpVxVhwfCTRWW6kxgsHihKkiZgeutAzaclHGncudp4bB-IMoXgzvfuipKvJj06T8fyEH5k",
+    "preview_content": "TẤM PIN NĂNG LƯỢNG MẶT TRỜI HOẠT ĐỘNG NHƯ THẾ NÀO?Với kinh nghiệm nhiều năm trong lĩnh vực điện mặt trời, công ty Vtechs Việt Nam hôm nay xin chỉ.."
+  },
+  {
+    "page_path": "/news/kien-thuc-chung-ve-dmt",
+    "title": "Kiến thức chung về ĐMT",
+    "img": "https://lh3.googleusercontent.com/suk9JJGDduf7YYC11wQF7SBsK2vp0SD9PezSfTLlqjVXZJtQKePOAPCpxYZ_zMeWJUEMtTZnXnBpVxVhwfCTRWW6kxgsHihKkiZgeutAzaclHGncudp4bB-IMoXgzvfuipKvJj06T8fyEH5k",
+    "preview_content": "TẤM PIN NĂNG LƯỢNG MẶT TRỜI HOẠT ĐỘNG NHƯ THẾ NÀO?Với kinh nghiệm nhiều năm trong lĩnh vực điện mặt trời, công ty Vtechs Việt Nam hôm nay xin chỉ.."
   }
 ]

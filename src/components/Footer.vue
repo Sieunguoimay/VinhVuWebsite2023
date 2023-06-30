@@ -89,6 +89,7 @@ img {
 
     color: gray;
     margin-bottom: 20px;
+    padding-left:20px;
 }
 
 .left,
@@ -143,8 +144,8 @@ img {
 .right {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    /* align-items: center; */
+    /* gap: 10px; */
 }
 
 .social-title p {
@@ -156,7 +157,7 @@ img {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .social a {
@@ -170,6 +171,9 @@ img {
 }
 
 .info {}
+.footer-lower a{
+    color:#364d6a;
+}
 </style>
 <script>
 import PriceConsultantBar from "./tiny/PriceConsultantBar.vue"

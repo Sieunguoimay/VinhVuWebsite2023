@@ -32,6 +32,8 @@ const store = createStore({
         updateNavigationItemCurrent(state, currentPath) {
             if (this.state.data != null) {
                 this.commit('updateNavigationItemCurrent', currentPath)
+                const title = $dataUtils.getDocumentTitle(this.state.data);
+                document.title = title;
             }
         },
         loadData(state, done) {
@@ -71,8 +73,13 @@ const store = createStore({
             var pg = this.state.data.page_groups.find(g => g.path == params.pageGroupPath);
             var pagesOfGroup = this.state.data.pages.filter(p => p.page_group_id == pg.id && (p.content_loaded == undefined || p.content_loaded == false));
             if (pagesOfGroup.length > 0) {
-                $dataUtils.fetchPages(pagesOfGroup, errors => {
+                const optimize_for_speed = this.state.data.settings.optimize_for_speed;
+                $dataUtils.fetchPages(optimize_for_speed, pagesOfGroup, errors => {
                     if (errors == null) {
+                        pg.pages = [];
+                        for (const page of this.state.data.pages.filter(p => p.page_group_id == pg.id)) {
+                            pg.pages.push(page);
+                        }
                         params.output();
                     }
                 })
@@ -97,7 +104,8 @@ const store = createStore({
                     this.state.data.explore_more_data.cards = $dataUtils.generateExploreMoreData(this.state.data.pages);
                     params.output();
                 } else {
-                    $dataUtils.fetchPages(pagesToLoad, errors => {
+                    const optimize_for_speed = this.state.data.settings.optimize_for_speed;
+                    $dataUtils.fetchPages(optimize_for_speed, pagesToLoad, errors => {
                         if (errors == null) {
                             this.state.data.explore_more_data.cards = $dataUtils.generateExploreMoreData(this.state.data.pages);
                             params.output();

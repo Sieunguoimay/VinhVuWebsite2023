@@ -64,15 +64,15 @@
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
-    border-bottom: 2px solid #37923748;
+    border-bottom: 2px solid #364d6a;
 }
 
 .group-buttons a:hover:not(.router-link-active) {
-    --group-button-text-color: #379237;
+    --group-button-text-color: #364d6a;
 }
 
 .router-link-active {
-    background-color: #379237;
+    background-color: #364d6a;
     --group-button-text-color: white;
     color: var(--group-button-text-color);
 }
@@ -177,7 +177,6 @@ export default {
                     // console.log(data);
                 }
             });
-            console.log(this.$route);
             $this.$store.dispatch('tryLoadExploreMoreData', {
                 output: (data) => {
                     console.log($this.$store.state.data.explore_more_data);

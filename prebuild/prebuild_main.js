@@ -89,6 +89,7 @@ var obj = {
         });
     },
     getFirstImage(html) {
+        if (html == undefined) return null;
         const $ = cheerio.load(html);
         const found = $('body').find('img').first(i => i.attr('src') != undefined);
         return found != null ? found.attr('src') : null;
@@ -97,6 +98,7 @@ var obj = {
         page.name = this.getResponseFilename(response);
         page.simplified_name = this.simplifyString(page.name);
         page.path = this.getRelativePath(page.path) + "/" + page.simplified_name;
+        page.img = this.getFirstImage(page.content);
     },
     optimizeHtml(html) {
 
@@ -152,7 +154,7 @@ var obj = {
         return {
             page_path: page.path,
             title: page.name,
-            img: firstImageSrc == null ? '/src/assets/cover/cover_image_1.jpg' : firstImageSrc,
+            img: firstImageSrc == null ? '/src/assets/placeholder.png' : firstImageSrc,
             preview_content: this.getPreviewContent(html)
         };
     }

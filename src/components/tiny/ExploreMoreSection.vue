@@ -30,6 +30,7 @@ export default {
     },
     methods: {
         getRandomElements(array, numElements) {
+            array = array.filter(c => c.page_path != this.$route.path);
             const shuffledArray = array.sort(() => 0.5 - Math.random());
             return shuffledArray.slice(0, numElements);
         }
@@ -38,9 +39,10 @@ export default {
 </script>
   
 <style scoped>
-.explore-container{
+.explore-container {
     margin-top: 50px;
 }
+
 .articles {
     display: flex;
     flex-direction: row;

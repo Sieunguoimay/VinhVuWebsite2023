@@ -3,12 +3,30 @@
     "optimize_for_speed": false,
     "website_config_url": "https://docs.google.com/document/d/1H68sdFH5AP76Cbd-yRzpKKJGuD8-OH3piu1U00N31qM/edit?usp=sharing"
   },
+  "slides": [
+    {
+      "left": "/src/assets/cover/slide-1-split-left.jpg",
+      "right": "/src/assets/cover/slide-1-split-right.jpg"
+    },
+    {
+      "left": "/src/assets/cover/slide-2-split-left.jpg",
+      "right": "/src/assets/cover/slide-2-split-right.jpg"
+    },
+    {
+      "left": "/src/assets/cover/slide-3-split-left.jpg",
+      "right": "/src/assets/cover/slide-3-split-right.jpg"
+    },
+    {
+      "left": "/src/assets/cover/slide-4-split-left.jpg",
+      "right": "/src/assets/cover/slide-4-split-right.jpg"
+    }
+  ],
   "info": {
     "texts": [
       {
         "key": "website_full_name",
         "label": "",
-        "value": "Viesolar Technology"
+        "value": "CÔNG TY NĂNG LƯỢNG MẶT TRỜI VIESOLAR"
       },
       {
         "key": "address",
@@ -24,6 +42,11 @@
         "key": "email",
         "label": "Email",
         "value": "viesolar@gmail.com"
+      },
+      {
+        "key": "messenger",
+        "label": "Messenger",
+        "value": "https://m.me/"
       }
     ],
     "socials": [
@@ -34,7 +57,7 @@
       },
       {
         "name": "Zalo",
-        "url": "https://web.zalo.com",
+        "url": "https://chat.zalo.me",
         "img": "/socials/icon_zalo.png"
       },
       {
@@ -47,18 +70,18 @@
       "img": "/viesolar-logo.png"
     },
     "website_url": {
-      "label": "www.viesolar.vn",
+      "label": "viesolar.vn",
       "url": "https://viesolar.vn"
     }
   },
   "navigation": {
     "nav_groups": [
       {
-        "display_name": "DỊCH VỤ",
+        "display_name": "SẢN PHẨM",
         "path": "/services"
       },
       {
-        "display_name": "GIẢI PHÁP",
+        "display_name": "DỊCH VỤ",
         "path": "/solutions"
       },
       {
@@ -70,13 +93,18 @@
   "page_groups": [
     {
       "id": "news",
-      "name": "TIN TỨC CHUNG",
+      "name": "Tin tức chung",
       "path": "/newsfeed/tin-tuc-chung"
     },
     {
       "id": "knowledge",
-      "name": "KIẾN THỨC CHUNG VỀ ĐMT",
+      "name": "Kiến thức chung về ĐMT",
       "path": "/newsfeed/kien-thuc-chung-ve-dmt"
+    },
+    {
+      "id": "business_solutions",
+      "name": "Lắp đặt ĐMT DOANH NGHIỆP",
+      "path": "/solutions/business"
     }
   ],
   "pages": [
@@ -84,45 +112,93 @@
       "path": "/",
       "name": "TRANG CHỦ",
       "content": {
-        "three_cards_title": "Chúng tôi cung cấp các dịch vụ",
+        "three_cards_title": "Chúng tôi cung cấp các sản phẩm",
         "center_description": "Viesolar Technology"
       },
       "show_on_nav_bar": true
     },
     {
-      "path": "/services/dich-vu-epc",
+      "path": "/services/tam-pv-nang-luong-mat-troi",
       "content_path": "https://docs.google.com/document/d/1IIelwIlDHJYY7UMLlK12fyfOXzJe-gUWYzBVyZEt8VQ/edit?usp=drive_link",
       "show_on_nav_bar": true,
-      "name": "Dịch vụ EPC",
-      "simplified_name": "dich-vu-epc"
+      "name": "Tấm PV năng lượng mặt trời",
+      "simplified_name": "tam-pv-nang-luong-mat-troi",
+      "img": null
     },
     {
-      "path": "/services/dich-vu-bot",
+      "path": "/services/solar-inverter",
+      "content_path": "https://docs.google.com/document/d/1ODLrJ4TDlCVPKW6WyCDxpDkzcKm2toH2Ee7N4Ghacvc/edit?usp=drive_link",
+      "show_on_nav_bar": true,
+      "name": "Solar inverter",
+      "simplified_name": "solar-inverter",
+      "img": null
+    },
+    {
+      "path": "/services/bo-luu-tru",
+      "content_path": "https://docs.google.com/document/d/1QVeC2neRYbcWIiUXvyJQ9yySWQi579MALY47kW7hCbI/edit?usp=drive_link",
+      "show_on_nav_bar": true,
+      "name": "Bộ lưu trữ",
+      "simplified_name": "bo-luu-tru",
+      "img": null
+    },
+    {
+      "path": "/services/phu-kien-gia-do-tam-pv",
+      "content_path": "https://docs.google.com/document/d/1YXlfTeiDlhccqyTnzeCPaQAigCjaoFA0iEYySsiQFVE/edit?usp=drive_link",
+      "show_on_nav_bar": true,
+      "name": "Phụ kiện giá đỡ tấm PV",
+      "simplified_name": "phu-kien-gia-do-tam-pv",
+      "img": null
+    },
+    {
+      "path": "/services/den-nang-luong-mat-troi",
       "content_path": "https://docs.google.com/document/d/1uZ5ZsrJlBax42vwsok5U8PMP19wELMZpwFFDEvr4OO8/edit?usp=drive_link",
       "show_on_nav_bar": true,
-      "name": "Dịch vụ BOT",
-      "simplified_name": "dich-vu-bot"
+      "name": "Đèn năng lượng mặt trời",
+      "simplified_name": "den-nang-luong-mat-troi",
+      "img": null
     },
     {
-      "path": "/services/dich-vu-o&m",
+      "path": "/services/quat-nang-luong-mat-troi",
       "content_path": "https://docs.google.com/document/d/1Ke0ndyxFx_l0WSAM0Uzyr_YPekVlS77rSHIAgTM0yV8/edit?usp=drive_link",
       "show_on_nav_bar": true,
-      "name": "Dịch vụ O&M",
-      "simplified_name": "dich-vu-o&m"
+      "name": "Quạt năng lượng mặt trời",
+      "simplified_name": "quat-nang-luong-mat-troi",
+      "img": null
     },
     {
-      "path": "/solutions/he-thong-dmt-ho-gia-dinh",
+      "path": "/solutions/lap-dat-dmt-ho-gia-dinh",
       "content_path": "https://docs.google.com/document/d/1H-K57kMRJWEOaTBrawSqdY4ZbP5ZCN0jcn4h0SmRMMc/edit?usp=drive_link",
       "show_on_nav_bar": true,
-      "name": "Hệ thống ĐMT HỘ GIA ĐÌNH",
-      "simplified_name": "he-thong-dmt-ho-gia-dinh"
+      "name": "Lắp đặt ĐMT HỘ GIA ĐÌNH",
+      "simplified_name": "lap-dat-dmt-ho-gia-dinh",
+      "img": null
     },
     {
-      "path": "/solutions/he-thong-dmt-doanh-nghiep",
+      "path": "/solutions/dich-vu-o&m",
       "content_path": "https://docs.google.com/document/d/1Ju6RUPar7SkIQpWuELfqz3KUMGraoWueksatNr9scoI/edit?usp=drive_link",
-      "show_on_nav_bar": true,
-      "name": "Hệ thống ĐMT DOANH NGHIỆP",
-      "simplified_name": "he-thong-dmt-doanh-nghiep"
+      "show_on_nav_bar": false,
+      "page_group_id": "business_solutions",
+      "name": "Dịch vụ O&M",
+      "simplified_name": "dich-vu-o&m",
+      "img": null
+    },
+    {
+      "path": "/solutions/dich-vu-epc",
+      "content_path": "https://docs.google.com/document/d/1fcuHzyGaERD5TnVLQiD2TTDswXwXxv-Q6VpyoAShDdM/edit?usp=drive_link",
+      "show_on_nav_bar": false,
+      "page_group_id": "business_solutions",
+      "name": "Dịch vụ EPC",
+      "simplified_name": "dich-vu-epc",
+      "img": null
+    },
+    {
+      "path": "/solutions/dich-vu-bot",
+      "content_path": "https://docs.google.com/document/d/1Ify6P7D9ETGbkt24H9CMXDsgS5fkj1Zjt8bZkBg1KIk/edit?usp=drive_link",
+      "show_on_nav_bar": false,
+      "page_group_id": "business_solutions",
+      "name": "Dịch vụ BOT",
+      "simplified_name": "dich-vu-bot",
+      "img": null
     },
     {
       "path": "/news/tin-tuc-chung",
@@ -130,7 +206,17 @@
       "show_on_nav_bar": false,
       "page_group_id": "news",
       "name": "Tin tức chung",
-      "simplified_name": "tin-tuc-chung"
+      "simplified_name": "tin-tuc-chung",
+      "img": null
+    },
+    {
+      "path": "/news/tin-tuc-chung",
+      "content_path": "https://docs.google.com/document/d/17foGr24QoxgjXQLei4tptYOht2c1Xps_GbKcysSigWQ/edit?usp=drive_link",
+      "show_on_nav_bar": false,
+      "page_group_id": "news",
+      "name": "Tin tức chung",
+      "simplified_name": "tin-tuc-chung",
+      "img": null
     },
     {
       "path": "/news/kien-thuc-chung-ve-dmt",
@@ -138,12 +224,28 @@
       "show_on_nav_bar": false,
       "page_group_id": "knowledge",
       "name": "Kiến thức chung về ĐMT",
-      "simplified_name": "kien-thuc-chung-ve-dmt"
+      "simplified_name": "kien-thuc-chung-ve-dmt",
+      "img": null
+    },
+    {
+      "path": "/news/kien-thuc-chung-ve-dmt",
+      "content_path": "https://docs.google.com/document/d/1Q8I0JgTyp0vdPgldrl_xlqL9KT6m5lkFNHYBhZ4EDgg/edit?usp=drive_link",
+      "show_on_nav_bar": false,
+      "page_group_id": "knowledge",
+      "name": "Kiến thức chung về ĐMT",
+      "simplified_name": "kien-thuc-chung-ve-dmt",
+      "img": null
     },
     {
       "path": "/contact",
       "name": "LIÊN HỆ",
-      "show_on_nav_bar": true
+      "show_on_nav_bar": true,
+      "content": {
+        "head": "LIÊN HỆ VỚI CHÚNG TÔI NGAY ĐỂ ĐƯỢC TƯ VẤN MIỄN PHÍ!"
+      }
     }
-  ]
+  ],
+  "explore_more_data": {
+    "title": "CÁC NỘI DUNG KHÁC"
+  }
 }

@@ -2,7 +2,7 @@
     <div class="header-handy-info">
         <span>Hotline: {{ phone }}</span><span>|</span>
         <span>Email: {{ mail }}</span><span>|</span>
-        <span>Nothing</span>
+        <span>Website: {{ website }}</span>
     </div>
 </template>
 <style scoped>
@@ -49,6 +49,9 @@ export default {
             return this.info.texts.find(t => t.key == "phone").value;
         }, mail() {
             return this.info.texts.find(t => t.key == "email").value;
+        },
+        website() {
+            return this.info.website_url.label;
         }
     }
 }

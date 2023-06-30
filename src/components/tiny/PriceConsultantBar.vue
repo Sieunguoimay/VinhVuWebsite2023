@@ -5,16 +5,19 @@
                 <p>{{ label }}:</p>
             </div>
             <div class="contact-media">
-                <a href="#" class="contact-media-item" v-for="item in contact_items" :key="item.url">
-                    <img :src="item.img" :alt="item.img" />
-                </a>
+                <a :href="messenger.value" class="contact-media-item"><img src="/src/assets/socials/messenger.png"
+                        alt="/src/assets/socials/messenger.png"></a>
+                <a :href="'tel:' + phone.value" class="contact-media-item"><img src="/src/assets/headset.png"
+                        alt="/src/assets/headset.png"></a>
+                <a :href="'mailto:' + mail.value" class="contact-media-item"><img src="/src/assets/email.png"
+                        alt="/src/assets/email.png"></a>
             </div>
         </div>
     </div>
 </template>
 <style scoped>
 .container {
-    background-color: #82CD47;
+    background-color: #364d6a;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -45,7 +48,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: #82CD47;
+    background-color: #364d6a;
 }
 
 .contact-media-item img {
@@ -59,18 +62,16 @@ export default {
     data() {
         return {
             label: "Nhận tư vấn báo giá trực tiếp",
-            contact_items: [
-                {
-                    url: "#",
-                    img: "./src/assets/socials/messenger.png"
-                }, {
-                    url: "#",
-                    img: "./src/assets/headset.png"
-                }, {
-                    url: "#",
-                    img: "./src/assets/email.png"
-                }
-            ]
+        }
+    },
+    computed: {
+        messenger() {
+            return this.$store.state.data.info.texts.find(t => t.key == 'messenger');
+        },
+        phone() {
+            return this.$store.state.data.info.texts.find(t => t.key == 'phone');
+        }, mail() {
+            return this.$store.state.data.info.texts.find(t => t.key == 'email');
         }
     }
 }

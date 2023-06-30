@@ -226,12 +226,22 @@
     margin-bottom: 30px;
     display: flex;
     justify-content: center;
+    color: #364d6a;
+}
+
+.main-slogan h1 {
+    font-weight: bold;
 }
 
 .three-cards-title {
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
+    color: #364d6a;
+}
+
+.three-cards-title h2 {
+    /* font-weight: bold; */
 }
 </style>
 <script>
@@ -242,7 +252,7 @@ export default {
         home_content() {
             return this.$store.state.data.pages.find(p => p.path == '/').content;
         },
-        
+
         slides() {
             return this.$store.state.data.slides;
         }
